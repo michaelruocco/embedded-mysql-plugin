@@ -19,4 +19,5 @@ dependencies {
 
     testCompile 'junit:junit:4.11'
     testCompile 'org.assertj:assertj-core:1.7.1'
+    testCompile 'mysql:mysql-connector-java:5.1.37'
 }
