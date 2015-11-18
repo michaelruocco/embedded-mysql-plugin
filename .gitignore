@@ -1,3 +1,4 @@
 .gradle
 .idea
+build
 embedded-mysql-plugin.iml

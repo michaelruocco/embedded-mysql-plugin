@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 project.ext {
-    version = '1.0-SNAPSHOT'
+    version = '1.0.0-SNAPSHOT'
     artifact = "embedded-mysql-plugin"
     group = 'uk.co.mruoc.mysql'
 }
@@ -14,7 +14,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.wix:wix-embedded-mysql:1.0.2'
 
     testCompile 'junit:junit:4.11'
+    testCompile 'org.assertj:assertj-core:1.7.1'
 }
