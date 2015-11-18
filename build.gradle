@@ -1,11 +1,10 @@
 apply plugin: 'groovy'
-apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 project.ext {
     version = '1.0.0-SNAPSHOT'
-    artifact = "embedded-mysql-plugin"
+    artifact = 'embedded-mysql-plugin'
     group = 'uk.co.mruoc.mysql'
 }
 
