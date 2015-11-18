@@ -8,6 +8,8 @@ class EmbeddedMysqlPlugin implements Plugin<Project>  {
     @Override
     public void apply(Project project) {
         project.extensions.create('embeddedMysql', EmbeddedMysqlExtension)
+        project.task('startEmbeddedMysql', type: StartEmbeddedMysqlTask)
+        project.task('stopEmbeddedMysql', type: StopEmbeddedMysqlTask)
     }
 
 }

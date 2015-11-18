@@ -16,6 +16,18 @@ class EmbeddedMysqlPluginTest {
         assertThat(project.extensions.embeddedMysql instanceof EmbeddedMysqlExtension).isTrue()
     }
 
+    @Test
+    void addsStartEmbeddedMysqlTaskToProject() {
+        applyPluginToProject()
+        assertThat(project.tasks.startEmbeddedMysql instanceof StartEmbeddedMysqlTask).isTrue()
+    }
+
+    @Test
+    void addsStopEmbeddedMysqlTaskToProject() {
+        applyPluginToProject()
+        assertThat(project.tasks.stopEmbeddedMysql instanceof StopEmbeddedMysqlTask).isTrue()
+    }
+
     private void applyPluginToProject() {
         project.plugins.apply(EmbeddedMysqlPlugin)
     }
