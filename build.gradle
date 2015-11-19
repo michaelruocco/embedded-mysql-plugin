@@ -50,7 +50,7 @@ uploadArchives {
                 packaging 'jar'
                 name 'Embedded MySQL Plugin'
                 description 'Gradle plugin that enables running embedded MySQL for testing'
-                groupId 'com.github.michaelruocco'
+                groupId 'com.github.michaelruocco.mysql'
                 artifactId 'embedded-mysql-plugin'
                 version '0.1.0'
                 url 'https://github.com/michaelruocco/embedded-mysql-plugin'
