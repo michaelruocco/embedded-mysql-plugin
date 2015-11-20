@@ -1,5 +1,5 @@
 # Embedded MySQL Gradle Plugin
-[![Build Status (Travis: Linux)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)
+![Build Status (Travis: Linux)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)
 
 This plugin is built around the [embedded mysql project](https://github.com/wix/wix-embedded-mysql).
 It allows you to easily start up a MySQL process withouth having to install it by hand. Currently
