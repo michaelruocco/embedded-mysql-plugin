@@ -30,5 +30,3 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
-
-apply from: 'deploy.gradle'
