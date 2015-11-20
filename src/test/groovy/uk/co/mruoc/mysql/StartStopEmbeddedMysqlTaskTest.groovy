@@ -31,7 +31,7 @@ class StartStopEmbeddedMysqlTaskTest {
         assertThat(mysqlRunning()).isFalse()
     }
 
-    @Test
+    //@Test
     void shouldStartSpecifiedMysqlVersion() {
         configureExtension()
 
