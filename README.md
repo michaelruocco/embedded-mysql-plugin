@@ -42,6 +42,8 @@ This will add two new tasks to your gradle build:
 * startEmbeddedMysql
 * stopEmbeddedMysql
 
+### Configuring your embedded MySQL database
+
 It should be fairly obvious what these two tasks do, before you can use them you will need to
 configure how you want your mysql to run, you do this by providing properties to the EmbeddedMysqlExtension
 as shown below.
@@ -58,7 +60,24 @@ embeddedMysql {
 Once you have set these properties they will be used to spin up your database so you can connect to
 it as you would any other mysql database.
 
-### Connecting to the database
+#### Default configuration
+
+The default values for each of these properties are
+
+* databaseName = '' (empty string, process will not work if a databaseName is not provided)
+* port = 3306 (default MySQL port)
+* username = 'root'
+* password = '' (empty string, this means no password is required to access your embedded MySQL database)
+
+This means the example configuration above could also be expressed as shown below.
+
+```
+embeddedMysql {
+    databaseName = 'my-database-name'
+}
+```
+
+### Connecting to your embedded MySQL database
 
 Given the example shown above and using the standard MySQL JDBC connector you would connect to
 this database using the code shown below.
