@@ -2,3 +2,5 @@
 .idea
 build
 embedded-mysql-plugin.iml
+deploy.gradle
+gradle.properties
