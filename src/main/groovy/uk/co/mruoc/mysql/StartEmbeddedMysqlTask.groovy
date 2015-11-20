@@ -5,7 +5,6 @@ import org.gradle.api.tasks.TaskAction
 
 import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig
-import static com.wix.mysql.distribution.Version.v5_6_22
 
 class StartEmbeddedMysqlTask extends DefaultTask {
 
@@ -15,7 +14,7 @@ class StartEmbeddedMysqlTask extends DefaultTask {
 
     @TaskAction
     def run() {
-        def config = aMysqldConfig(v5_6_22)
+        def config = aMysqldConfig(extension.version)
                 .withPort(extension.port)
                 .withUser(extension.username, extension.password)
                 .build();
