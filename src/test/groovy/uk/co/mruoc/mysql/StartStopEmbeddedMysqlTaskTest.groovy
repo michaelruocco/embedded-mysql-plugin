@@ -1,11 +1,11 @@
 package uk.co.mruoc.mysql
 
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
 import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.SQLException
 
 import static org.assertj.core.api.Assertions.assertThat
 
@@ -53,13 +53,19 @@ class StartStopEmbeddedMysqlTaskTest {
 
     private mysqlRunning() {
         try {
-            Class.forName("com.mysql.jdbc.Driver")
-            Connection connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD)
-            connection.close();
-            return true;
-        } catch (SQLException e) {
-            return false;
+            Connection connection = getConnection()
+            try {
+                return connection.isValid(1)
+            } finally {
+                connection.close()
+            }
+        } catch (CommunicationsException e) {
+            return false
         }
+    }
+
+    private getConnection() {
+        DriverManager.getConnection(connectionString, USERNAME, PASSWORD)
     }
 
     private getConnectionString() {
