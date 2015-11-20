@@ -1,16 +1,21 @@
 package uk.co.mruoc.mysql
 
+import com.wix.mysql.distribution.Version
 import org.junit.Test
 
+import static com.wix.mysql.distribution.Version.v5_6_latest
 import static org.assertj.core.api.Assertions.assertThat
+import static com.wix.mysql.distribution.Version.v5_6_22
 
 class EmbeddedMysqlExtensionTest {
 
     private static final int DEFAULT_MYSQL_PORT = 3306
     private static final String DEFAULT_USERNAME = "root"
+    private static final Version DEFAULT_VERSION = v5_6_22
 
     private static final int OVERRIDE_PORT = 1234
     private static final String OVERRIDE_USERNAME = "anotherUser"
+    private static final Version OVERRIDE_VERSION = v5_6_latest
 
     private static final String DATABASE_NAME = "databaseName"
     private static final String PASSWORD = "password"
@@ -38,6 +43,11 @@ class EmbeddedMysqlExtensionTest {
     }
 
     @Test
+    public void versionShouldDefaultToFivePointSixPointTwoTwo() {
+        assertThat(extension.version).isEqualTo(v5_6_22)
+    }
+
+    @Test
     public void shouldSetDatabaseName() {
         extension.databaseName = DATABASE_NAME
         assertThat(extension.databaseName).isEqualTo(DATABASE_NAME)
@@ -51,7 +61,7 @@ class EmbeddedMysqlExtensionTest {
 
     @Test
     public void shouldSetUsername() {
-        extension.port = OVERRIDE_USERNAME
+        extension.username = OVERRIDE_USERNAME
         assertThat(extension.username).isEqualTo(OVERRIDE_USERNAME)
     }
 
@@ -59,6 +69,12 @@ class EmbeddedMysqlExtensionTest {
     public void shouldSetPassword() {
         extension.password = PASSWORD
         assertThat(extension.password).isEqualTo(PASSWORD)
+    }
+
+    @Test
+    public void shouldSetVersion() {
+        extension.version = OVERRIDE_VERSION
+        assertThat(extension.version).isEqualTo(OVERRIDE_VERSION)
     }
 
 }

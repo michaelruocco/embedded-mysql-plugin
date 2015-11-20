@@ -54,6 +54,7 @@ embeddedMysql {
     port = 3306
     username = 'root'
     password = ''
+    version = 'v5_6_22'
 }
 ```
 
@@ -62,12 +63,13 @@ it as you would any other mysql database.
 
 #### Default configuration
 
-The default values for each of these properties are
+The default values for each of these properties are:
 
 * databaseName = '' (empty string, process will not work if a databaseName is not provided)
 * port = 3306 (default MySQL port)
 * username = 'root'
 * password = '' (empty string, this means no password is required to access your embedded MySQL database)
+* version = 'v5_6_22' (default version of MySQL used by this plugin 5.6.22)
 
 This means the example configuration above could also be expressed as shown below.
 
@@ -76,6 +78,19 @@ embeddedMysql {
     databaseName = 'my-database-name'
 }
 ```
+
+#### Available versions
+
+When selecting a version of MySQL to run you have the following versions currently available:
+
+* v5_5_40
+* v5_6_21
+* v5_6_22
+* v5_6_23
+* v5_6_24
+* v5_6_latest
+
+These available versions are exposed by the [embedded mysql project](https://github.com/wix/wix-embedded-mysql)
 
 ### Connecting to your embedded MySQL database
 
