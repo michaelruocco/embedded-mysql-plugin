@@ -1,8 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
-apply plugin: 'signing'
 
 repositories {
     mavenCentral()
@@ -31,52 +29,4 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                packaging 'jar'
-                name 'Embedded MySQL Plugin'
-                description 'Gradle plugin that enables running embedded MySQL for testing'
-                groupId 'com.github.michaelruocco.mysql'
-                artifactId 'embedded-mysql-plugin'
-                version '0.1.0'
-                url 'https://github.com/michaelruocco/embedded-mysql-plugin'
-
-                developers {
-                    developer {
-                        id 'mruoc'
-                        name 'Michael Ruocco'
-                        email 'michael.ruocco@hotmail.com'
-                    }
-                }
-
-                scm {
-                    connection 'scm:git:git@github.com/michaelruocco/embedded-mysql-plugin.git'
-                    developerConnection 'scm:git:git@github.com/michaelruocco/embedded-mysql-plugin.git'
-                    url 'git@github.com/michaelruocco/embedded-mysql-plugin.git'
-                }
-
-                licenses {
-                    license {
-                        name 'BSD License'
-                        url 'http://www.opensource.org/licenses/bsd-license.php'
-                        distribution 'repo'
-                    }
-                }
-            }
-        }
-    }
 }
