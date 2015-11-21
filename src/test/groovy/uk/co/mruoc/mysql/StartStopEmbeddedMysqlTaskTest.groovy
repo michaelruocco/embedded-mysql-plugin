@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat
 
 class StartStopEmbeddedMysqlTaskTest {
 
-    private static final def DATABASE_NAME = "databaseName";
-    private static final def PORT = 3307;
-    private static final def USERNAME = "root";
-    private static final def PASSWORD = "";
-    private static final def VERSION = v5_6_23.name();
+    private static final def DATABASE_NAME = "databaseName"
+    private static final def PORT = 3307
+    private static final def USERNAME = "root"
+    private static final def PASSWORD = ""
+    private static final def VERSION = v5_6_23.name()
 
     private def project = ProjectBuilder.builder().build()
 
