@@ -6,14 +6,31 @@ import org.gradle.api.tasks.TaskAction
 
 class StopEmbeddedMysqlTask extends DefaultTask {
 
-    StopEmbeddedMysqlTask() {
+    private static final def MYSQL_PROCESS_PROPERTY_NAME = "mysqlProcess"
+
+    def StopEmbeddedMysqlTask() {
         description 'stops an embedded mysql process'
     }
 
     @TaskAction
     def run() {
-        def mysql = (EmbeddedMysql) project.extensions.extraProperties.get("mysqlProcess")
-        mysql.stop()
+        if (hasMysqlProcessProperty()) {
+            def mysql = getMysqlProcessProperty()
+            mysql.stop()
+        }
+    }
+
+    def hasMysqlProcessProperty() {
+        return extraProperties.has(MYSQL_PROCESS_PROPERTY_NAME)
+    }
+
+    def getMysqlProcessProperty() {
+        return (EmbeddedMysql) extraProperties.get(MYSQL_PROCESS_PROPERTY_NAME)
+    }
+
+    def getExtraProperties() {
+        def extensions = project.extensions
+        return extensions.extraProperties
     }
 
 }

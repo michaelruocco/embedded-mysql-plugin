@@ -40,6 +40,12 @@ class StartStopEmbeddedMysqlTaskTest {
         executeStopTask()
     }
 
+    @Test
+    void shouldDoNothingIfStopCalledWithoutStart() {
+        configureExtension()
+        executeStopTask()
+    }
+
     private configureExtension() {
         def extension = getExtension()
         extension.databaseName = DATABASE_NAME

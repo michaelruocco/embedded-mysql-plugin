@@ -1,5 +1,6 @@
 package uk.co.mruoc.mysql
 
+import com.wix.mysql.EmbeddedMysql
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -8,7 +9,10 @@ import static com.wix.mysql.config.MysqldConfig.aMysqldConfig
 
 class StartEmbeddedMysqlTask extends DefaultTask {
 
-    StartEmbeddedMysqlTask() {
+    private static final def MYSQL_PROCESS_PROPERTY_NAME = "mysqlProcess"
+    private static final def MYSQL_EXTENSION_NAME = "embeddedMysql"
+
+    def StartEmbeddedMysqlTask() {
         description 'starts an embedded mysql process'
     }
 
@@ -23,11 +27,21 @@ class StartEmbeddedMysqlTask extends DefaultTask {
                 .addSchema(extension.databaseName)
                 .start();
 
-        project.extensions.extraProperties.set('mysqlProcess', mysql)
+        setMysqlProcessProperty(mysql)
     }
 
     def getExtension() {
-        return project.extensions.findByName('embeddedMysql') as EmbeddedMysqlExtension
+        def extensions = project.extensions
+        return extensions.findByName(MYSQL_EXTENSION_NAME) as EmbeddedMysqlExtension
+    }
+
+    def setMysqlProcessProperty(EmbeddedMysql embeddedMysql) {
+        return (EmbeddedMysql) extraProperties.set(MYSQL_PROCESS_PROPERTY_NAME, embeddedMysql)
+    }
+
+    def getExtraProperties() {
+        def extensions = project.extensions
+        return extensions.extraProperties
     }
 
 }
