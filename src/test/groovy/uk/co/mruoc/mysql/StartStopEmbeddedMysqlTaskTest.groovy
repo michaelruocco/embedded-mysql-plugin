@@ -1,7 +1,6 @@
 package uk.co.mruoc.mysql
 
 import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException
-import com.wix.mysql.distribution.Version
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
@@ -16,7 +15,7 @@ class StartStopEmbeddedMysqlTaskTest {
     private static final def PORT = 3307;
     private static final def USERNAME = "root";
     private static final def PASSWORD = "";
-    private static final Version VERSION = v5_6_23;
+    private static final def VERSION = v5_6_23.name();
 
     private def project = ProjectBuilder.builder().build()
 
@@ -100,11 +99,10 @@ class StartStopEmbeddedMysqlTaskTest {
         return s.toString()
     }
 
-    private format(Version version) {
-        def name = version.name()
-        name = name.replaceAll("_", ".")
-        name = name.replaceAll("v", "")
-        return name
+    private format(String version) {
+        version = version.replaceAll("_", ".")
+        version = version.replaceAll("v", "")
+        return version
     }
 
 }
