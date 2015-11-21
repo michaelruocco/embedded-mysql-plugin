@@ -27,7 +27,7 @@ class StartEmbeddedMysqlTask extends DefaultTask {
     }
 
     def getExtension() {
-        return project.extensions.findByName('embeddedMysqlExtension') as EmbeddedMysqlExtension
+        return project.extensions.findByName('embeddedMysql') as EmbeddedMysqlExtension
     }
 
 }

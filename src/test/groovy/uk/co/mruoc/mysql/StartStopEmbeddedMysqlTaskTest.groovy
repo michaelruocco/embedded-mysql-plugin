@@ -51,7 +51,7 @@ class StartStopEmbeddedMysqlTaskTest {
     }
 
     private getExtension() {
-        project.extensions.create('embeddedMysqlExtension', EmbeddedMysqlExtension)
+        project.extensions.create('embeddedMysql', EmbeddedMysqlExtension)
     }
 
     private executeStartTask() {
