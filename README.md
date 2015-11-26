@@ -36,7 +36,7 @@ buildscript {
 
 ### Applying the plugin
 
-To use the plugin, include the following code snippetin your build script:
+To use the plugin, include the following code snippet in your build script:
 
 ```
 apply plugin: 'embedded-mysql'
