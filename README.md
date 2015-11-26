@@ -25,7 +25,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'uk.co.mruoc.mysql:embedded-mysql-plugin:0.1.0'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:1.0.0'
     }
 }
 ```
