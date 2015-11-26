@@ -1,7 +1,6 @@
 # Embedded MySQL Gradle Plugin
 
 [![Build Status](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin)
-
 [![Coverage Status](https://coveralls.io/repos/michaelruocco/embedded-mysql-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/embedded-mysql-plugin?branch=master)
 
 This plugin is built around the [embedded mysql project](https://github.com/wix/wix-embedded-mysql).
