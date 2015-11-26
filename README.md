@@ -103,6 +103,6 @@ Given the example shown above and using the standard MySQL JDBC connector you wo
 this database using the code shown below.
 
 ```
-    Class.forName("com.mysql.jdbc.Driver")
-    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my-database-name", "root", "")
+Class.forName("com.mysql.jdbc.Driver")
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my-database-name", "root", "")
 ```
