@@ -1,6 +1,7 @@
 # Embedded MySQL Gradle Plugin
 
-[![Build Status](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin)
+[![Linux Build Status](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/ewbb2vr04e89sadf?svg=true)](https://ci.appveyor.com/project/michaelruocco/embedded-mysql-plugin)
 [![Coverage Status](https://coveralls.io/repos/michaelruocco/embedded-mysql-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/embedded-mysql-plugin?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/565653aaff016c0033001a2a/badge.svg?style=flat)](https://www.versioneye.com/user/projects/565653aaff016c0033001a2a)
 
