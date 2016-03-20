@@ -93,7 +93,15 @@ class EmbeddedMysqlExtensionTest {
         StringBuilder s = new StringBuilder()
         s.append("invalid version specified: ")
         s.append(invalidVersion)
-        s.append(" possible valid versions are: [ v5_5_40, v5_6_21, v5_6_22, v5_6_23, v5_6_24, v5_6_latest ]")
+        s.append(" possible valid versions are: [ ");
+        s.append("v5_5_40, ");
+        s.append("v5_6_21, ");
+        s.append("v5_6_22, ");
+        s.append("v5_6_23, ");
+        s.append("v5_6_24, ");
+        s.append("v5_7_10, ");
+        s.append("v5_7_latest, ");
+        s.append("v5_6_latest ]");
         return s.toString()
     }
 
