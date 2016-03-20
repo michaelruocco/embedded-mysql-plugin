@@ -13,6 +13,7 @@ class StartStopEmbeddedMysqlTaskTest {
 
     private static final def DATABASE_NAME = "databaseName"
     private static final def PORT = 3307
+    private static final def URL = "jdbc:mysql://localhost:" + PORT + "/" + DATABASE_NAME
     private static final def USERNAME = "root"
     private static final def PASSWORD = ""
     private static final def VERSION = v5_6_23.name()
@@ -48,8 +49,7 @@ class StartStopEmbeddedMysqlTaskTest {
 
     private configureExtension() {
         def extension = getExtension()
-        extension.databaseName = DATABASE_NAME
-        extension.port = PORT
+        extension.url = URL
         extension.username = USERNAME
         extension.password = PASSWORD
         extension.version = VERSION
@@ -93,16 +93,7 @@ class StartStopEmbeddedMysqlTaskTest {
     }
 
     private getConnection() {
-        return DriverManager.getConnection(connectionString, USERNAME, PASSWORD)
-    }
-
-    private getConnectionString() {
-        def s = new StringBuilder()
-        s.append('jdbc:mysql://localhost:')
-        s.append(PORT)
-        s.append('/')
-        s.append(DATABASE_NAME)
-        return s.toString()
+        return DriverManager.getConnection(URL, USERNAME, PASSWORD)
     }
 
     private format(String version) {

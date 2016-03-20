@@ -12,26 +12,26 @@ class EmbeddedMysqlExtension {
     private static final def DEFAULT_USERNAME = "root"
     private static final def DEFAULT_VERSION = v5_6_22
 
+    private def url = EMPTY_STRING
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
     private def username = DEFAULT_USERNAME
     private def password = EMPTY_STRING
     private def version = DEFAULT_VERSION
 
-    public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName
-    }
-
     public String getDatabaseName() {
         return databaseName
     }
 
-    public void setPort(int port) {
-        this.port = port
-    }
-
     public int getPort() {
         return port
+    }
+
+    public void setUrl(String url) {
+        String cleanUrl = removeJdbcPrefix(url)
+        URI uri = URI.create(cleanUrl)
+        port = uri.getPort()
+        databaseName = removeForwardSlash(uri.getPath())
     }
 
     public void setUsername(String username) {
@@ -82,6 +82,14 @@ class EmbeddedMysqlExtension {
             return StringUtils.removeEnd(s.toString(), ",")
         }
         return s.toString();
+    }
+
+    private String removeJdbcPrefix(String s) {
+        return s.replaceAll("jdbc:", "")
+    }
+
+    private String removeForwardSlash(String s) {
+        return s.replaceAll("/", "")
     }
 
 }

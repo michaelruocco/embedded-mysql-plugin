@@ -11,27 +11,23 @@ import static org.assertj.core.api.Assertions.assertThat
 
 class EmbeddedMysqlExtensionTest {
 
-    private static final def DEFAULT_MYSQL_PORT = 3306
+    private static final def DATABASE_NAME = "databaseName"
+    private static final def PORT = 3306
+    private static final def URL = "jdbc:mysql://localhost:" + PORT + "/" + DATABASE_NAME
+
     private static final def DEFAULT_USERNAME = "root"
     private static final def DEFAULT_VERSION = v5_6_22
 
-    private static final def OVERRIDE_PORT = 1234
     private static final def OVERRIDE_USERNAME = "anotherUser"
     private static final def OVERRIDE_VERSION = v5_6_latest
 
-    private static final def DATABASE_NAME = "databaseName"
     private static final def PASSWORD = "password"
 
     private def extension = new EmbeddedMysqlExtension()
 
     @Test
-    public void databaseNameShouldDefaultToEmpty() {
-        assertThat(extension.databaseName).isEmpty()
-    }
-
-    @Test
-    public void portShouldDefaultToDefaultMysqlPort() {
-        assertThat(extension.port).isEqualTo(DEFAULT_MYSQL_PORT)
+    public void urlShouldDefaultToEmpty() {
+        assertThat(extension.url).isEmpty()
     }
 
     @Test
@@ -50,15 +46,15 @@ class EmbeddedMysqlExtensionTest {
     }
 
     @Test
-    public void shouldSetDatabaseName() {
-        extension.databaseName = DATABASE_NAME
+    public void shouldSetDatabaseNameFromUrl() {
+        extension.url = URL
         assertThat(extension.databaseName).isEqualTo(DATABASE_NAME)
     }
 
     @Test
-    public void shouldSetPort() {
-        extension.port = OVERRIDE_PORT
-        assertThat(extension.port).isEqualTo(OVERRIDE_PORT)
+    public void shouldSetPortFromUrl() {
+        extension.url = URL
+        assertThat(extension.port).isEqualTo(PORT)
     }
 
     @Test
