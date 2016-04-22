@@ -1,6 +1,6 @@
 package uk.co.mruoc.mysql
 
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException
+import com.mysql.cj.jdbc.exceptions.CommunicationsException
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
