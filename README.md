@@ -107,3 +107,11 @@ this database using the code shown below.
 Class.forName("com.mysql.jdbc.Driver")
 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my-database-name", "root", "")
 ```
+
+## Running the Tests
+
+You can run the unit and tests for this project by running the following command:
+
+```
+gradlew clean build
+```
