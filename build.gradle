@@ -56,8 +56,8 @@ artifacts {
     archives javadocJar
 }
 
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask("uploadArchives")) {
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(uploadArchives)) {
         signing {
             required true
             sign configurations.archives
