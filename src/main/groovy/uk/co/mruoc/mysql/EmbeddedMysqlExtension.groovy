@@ -12,7 +12,6 @@ class EmbeddedMysqlExtension {
     private static final def DEFAULT_USERNAME = "root"
     private static final def DEFAULT_VERSION = v5_6_22
 
-    private def url = EMPTY_STRING
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
     private def username = DEFAULT_USERNAME
@@ -28,6 +27,8 @@ class EmbeddedMysqlExtension {
     }
 
     public void setUrl(String url) {
+        if (url == null)
+            return
         String cleanUrl = removeJdbcPrefix(url)
         URI uri = URI.create(cleanUrl)
         port = uri.getPort()

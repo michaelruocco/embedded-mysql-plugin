@@ -12,11 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat
 class EmbeddedMysqlExtensionTest {
 
     private static final def DATABASE_NAME = "databaseName"
-    private static final def PORT = 3306
-    private static final def URL = "jdbc:mysql://localhost:" + PORT + "/" + DATABASE_NAME
+    private static final def OVERRIDE_PORT = 3307
+    private static final def URL = "jdbc:mysql://localhost:" + OVERRIDE_PORT + "/" + DATABASE_NAME
 
     private static final def DEFAULT_USERNAME = "root"
     private static final def DEFAULT_VERSION = v5_6_22
+    private static final def DEFAULT_PORT = 3306
 
     private static final def OVERRIDE_USERNAME = "anotherUser"
     private static final def OVERRIDE_VERSION = v5_6_latest
@@ -26,11 +27,6 @@ class EmbeddedMysqlExtensionTest {
     private def extension = new EmbeddedMysqlExtension()
 
     @Test
-    public void urlShouldDefaultToEmpty() {
-        assertThat(extension.url).isEmpty()
-    }
-
-    @Test
     public void usernameDefaultToRoot() {
         assertThat(extension.username).isEqualTo(DEFAULT_USERNAME)
     }
@@ -38,6 +34,16 @@ class EmbeddedMysqlExtensionTest {
     @Test
     public void passwordShouldDefaultToEmpty() {
         assertThat(extension.password).isEmpty()
+    }
+
+    @Test
+    public void portShouldDefaultToEmpty() {
+        assertThat(extension.port).isEqualTo(DEFAULT_PORT)
+    }
+
+    @Test
+    public void databaseNameShouldDefaultToEmpty() {
+        assertThat(extension.databaseName).isEmpty()
     }
 
     @Test
@@ -52,9 +58,16 @@ class EmbeddedMysqlExtensionTest {
     }
 
     @Test
+    public void shouldHandleSettingNullUrl() {
+        extension.url = null
+        assertThat(extension.port).isEqualTo(DEFAULT_PORT)
+        assertThat(extension.databaseName).isEmpty()
+    }
+
+    @Test
     public void shouldSetPortFromUrl() {
         extension.url = URL
-        assertThat(extension.port).isEqualTo(PORT)
+        assertThat(extension.port).isEqualTo(OVERRIDE_PORT)
     }
 
     @Test
@@ -85,7 +98,7 @@ class EmbeddedMysqlExtensionTest {
                 .hasMessage(buildExpectedInvalidVersionMessage(invalidVersion))
     }
 
-    private String buildExpectedInvalidVersionMessage(String invalidVersion) {
+    private static String buildExpectedInvalidVersionMessage(String invalidVersion) {
         StringBuilder s = new StringBuilder()
         s.append("invalid version specified: ")
         s.append(invalidVersion)
