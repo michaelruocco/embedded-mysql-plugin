@@ -29,7 +29,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.5.1'
+    testCompile 'org.assertj:assertj-core:3.5.2'
     testCompile 'mysql:mysql-connector-java:6.0.3'
     testCompile 'eu.codearte.catch-exception:catch-exception:1.4.4'
 }
