@@ -5,7 +5,6 @@ import org.junit.Test
 import static com.googlecode.catchexception.CatchException.caughtException
 import static com.googlecode.catchexception.apis.BDDCatchException.then
 import static com.googlecode.catchexception.apis.BDDCatchException.when
-import static com.wix.mysql.distribution.Version.v5_6_22
 import static com.wix.mysql.distribution.Version.v5_6_latest
 import static com.wix.mysql.distribution.Version.v5_7_latest
 import static org.assertj.core.api.Assertions.assertThat
