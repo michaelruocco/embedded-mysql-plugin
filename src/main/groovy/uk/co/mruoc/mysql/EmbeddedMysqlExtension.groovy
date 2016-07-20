@@ -3,14 +3,14 @@ package uk.co.mruoc.mysql
 import com.wix.mysql.distribution.Version
 import org.apache.commons.lang3.StringUtils
 
-import static com.wix.mysql.distribution.Version.v5_6_22
+import static com.wix.mysql.distribution.Version.v5_7_latest
 
 class EmbeddedMysqlExtension {
 
     private static final def EMPTY_STRING = ""
     private static final def DEFAULT_MYSQL_PORT = 3306
     private static final def DEFAULT_USERNAME = "root"
-    private static final def DEFAULT_VERSION = v5_6_22
+    private static final def DEFAULT_VERSION = v5_7_latest
 
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT

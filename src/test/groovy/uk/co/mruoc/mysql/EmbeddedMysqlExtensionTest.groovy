@@ -7,6 +7,7 @@ import static com.googlecode.catchexception.apis.BDDCatchException.then
 import static com.googlecode.catchexception.apis.BDDCatchException.when
 import static com.wix.mysql.distribution.Version.v5_6_22
 import static com.wix.mysql.distribution.Version.v5_6_latest
+import static com.wix.mysql.distribution.Version.v5_7_latest
 import static org.assertj.core.api.Assertions.assertThat
 
 class EmbeddedMysqlExtensionTest {
@@ -16,7 +17,7 @@ class EmbeddedMysqlExtensionTest {
     private static final def URL = "jdbc:mysql://localhost:" + OVERRIDE_PORT + "/" + DATABASE_NAME
 
     private static final def DEFAULT_USERNAME = "root"
-    private static final def DEFAULT_VERSION = v5_6_22
+    private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_PORT = 3306
 
     private static final def OVERRIDE_USERNAME = "anotherUser"
