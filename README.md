@@ -59,7 +59,7 @@ embeddedMysql {
     url = 'jdbc:mysql://localhost:3306/databaseName'
     username = 'root'
     password = ''
-    version = 'v5_6_22'
+    version = 'v5_7_latest'
 }
 ```
 
@@ -106,7 +106,7 @@ this database using the code shown below.
 
 ```
 Class.forName("com.mysql.jdbc.Driver")
-Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my-database-name", "root", "")
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/databaseName", "root", "")
 ```
 
 ## Running the Tests
