@@ -30,7 +30,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.michaelruocco:embedded-mysql-plugin:1.0.0'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.0.2'
     }
 }
 ```
