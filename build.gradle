@@ -84,7 +84,7 @@ uploadArchives {
                 description 'Gradle plugin that enables running embedded MySQL for testing'
                 groupId 'com.github.michaelruocco'
                 artifactId 'embedded-mysql-plugin'
-                version '2.0.1'
+                version '2.0.2'
                 url 'https://github.com/michaelruocco/embedded-mysql-plugin'
 
                 developers {
