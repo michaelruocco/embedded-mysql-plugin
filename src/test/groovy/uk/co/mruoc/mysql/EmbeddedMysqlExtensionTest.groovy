@@ -15,7 +15,7 @@ class EmbeddedMysqlExtensionTest {
     private static final def OVERRIDE_PORT = 3307
     private static final def URL = "jdbc:mysql://localhost:" + OVERRIDE_PORT + "/" + DATABASE_NAME
 
-    private static final def DEFAULT_USERNAME = "root"
+    private static final def DEFAULT_USERNAME = "user"
     private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_PORT = 3306
 
@@ -27,7 +27,7 @@ class EmbeddedMysqlExtensionTest {
     private def extension = new EmbeddedMysqlExtension()
 
     @Test
-    public void usernameDefaultToRoot() {
+    public void usernameDefaultToUser() {
         assertThat(extension.username).isEqualTo(DEFAULT_USERNAME)
     }
 

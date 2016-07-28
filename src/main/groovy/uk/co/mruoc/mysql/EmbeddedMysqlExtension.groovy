@@ -9,7 +9,7 @@ class EmbeddedMysqlExtension {
 
     private static final def EMPTY_STRING = ""
     private static final def DEFAULT_MYSQL_PORT = 3306
-    private static final def DEFAULT_USERNAME = "root"
+    private static final def DEFAULT_USERNAME = "user"
     private static final def DEFAULT_VERSION = v5_7_latest
 
     private def databaseName = EMPTY_STRING

@@ -57,7 +57,7 @@ as shown below.
 ```
 embeddedMysql {
     url = 'jdbc:mysql://localhost:3306/databaseName'
-    username = 'root'
+    username = 'user'
     password = ''
     version = 'v5_7_latest'
 }
@@ -72,7 +72,7 @@ The default values for each of the underlying properties are:
 
 * databaseName = '' (empty string, process will not work if a databaseName is not provided)
 * port = 3306 (default MySQL port)
-* username = 'root'
+* username = 'user'
 * password = '' (empty string, this means no password is required to access your embedded MySQL database)
 * version = 'v5_7_latest' (default version of MySQL used by this plugin 5.6.22)
 
@@ -106,7 +106,7 @@ this database using the code shown below.
 
 ```
 Class.forName("com.mysql.jdbc.Driver")
-Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/databaseName", "root", "")
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/databaseName", "user", "")
 ```
 
 ## Running the Tests
