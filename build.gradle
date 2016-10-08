@@ -25,12 +25,13 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile 'com.wix:wix-embedded-mysql:2.0.1'
+
+    compile 'com.wix:wix-embedded-mysql:2.0.3'
     compile 'org.apache.commons:commons-lang3:3.4'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile 'mysql:mysql-connector-java:6.0.3'
+    testCompile 'mysql:mysql-connector-java:6.0.4'
     testCompile 'eu.codearte.catch-exception:catch-exception:1.4.4'
 }
 
@@ -111,4 +112,8 @@ uploadArchives {
             }
         }
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
 }

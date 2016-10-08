@@ -3,7 +3,7 @@ package uk.co.mruoc.mysql
 import org.junit.Test
 
 import static com.googlecode.catchexception.CatchException.caughtException
-import static com.googlecode.catchexception.apis.BDDCatchException.then
+import static org.assertj.core.api.BDDAssertions.then;
 import static com.googlecode.catchexception.apis.BDDCatchException.when
 import static com.wix.mysql.distribution.Version.v5_6_latest
 import static com.wix.mysql.distribution.Version.v5_7_latest
@@ -110,6 +110,7 @@ class EmbeddedMysqlExtensionTest {
         s.append("v5_6_24, ");
         s.append("v5_6_latest, ");
         s.append("v5_7_10, ");
+        s.append("v5_7_13, ");
         s.append("v5_7_latest ]");
         return s.toString()
     }

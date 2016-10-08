@@ -95,6 +95,7 @@ When selecting a version of MySQL to run you have the following versions current
 * v5_6_24
 * v5_6_latest
 * v5_7_10
+* v5_7_13
 * v5_7_latest
 
 These available versions are exposed by the [embedded mysql project](https://github.com/wix/wix-embedded-mysql)
