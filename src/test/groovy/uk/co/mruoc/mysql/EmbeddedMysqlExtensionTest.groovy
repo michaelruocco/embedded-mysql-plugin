@@ -104,13 +104,22 @@ class EmbeddedMysqlExtensionTest {
         s.append(invalidVersion)
         s.append(" possible valid versions are: [ ");
         s.append("v5_5_40, ");
+        s.append("v5_5_50, ");
+        s.append("v5_5_51, ");
+        s.append("v5_5_52, ");
+        s.append("v5_5_latest, ");
         s.append("v5_6_21, ");
         s.append("v5_6_22, ");
         s.append("v5_6_23, ");
         s.append("v5_6_24, ");
+        s.append("v5_6_31, ");
+        s.append("v5_6_32, ");
+        s.append("v5_6_33, ");
         s.append("v5_6_latest, ");
         s.append("v5_7_10, ");
         s.append("v5_7_13, ");
+        s.append("v5_7_14, ");
+        s.append("v5_7_15, ");
         s.append("v5_7_latest ]");
         return s.toString()
     }
