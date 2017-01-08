@@ -3,7 +3,6 @@
 [![Linux Build Status](https://travis-ci.org/michaelruocco/embedded-mysql-plugin.svg?branch=master)](https://travis-ci.org/michaelruocco/embedded-mysql-plugin)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/ewbb2vr04e89sadf?svg=true)](https://ci.appveyor.com/project/michaelruocco/embedded-mysql-plugin)
 [![Coverage Status](https://coveralls.io/repos/michaelruocco/embedded-mysql-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/embedded-mysql-plugin?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/565653aaff016c0033001a2a/badge.svg?style=flat)](https://www.versioneye.com/user/projects/565653aaff016c0033001a2a)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/embedded-mysql-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/embedded-mysql-plugin)
 
 This plugin is built around the [embedded mysql project](https://github.com/wix/wix-embedded-mysql).
@@ -116,4 +115,13 @@ You can run the unit and tests for this project by running the following command
 
 ```
 gradlew clean build
+```
+
+## Checking dependencies
+
+You can check the current dependencies used by the project to see whether
+or not they are currently up to date by running the following command:
+
+```
+gradlew dependencyUpdates
 ```
