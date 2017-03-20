@@ -21,11 +21,17 @@ class StartEmbeddedMysqlTask extends DefaultTask {
         def config = aMysqldConfig(extension.version)
                 .withPort(extension.port)
                 .withUser(extension.username, extension.password)
-                .build();
+                .withCharset(extension.charset)
+
+        if (extension.serverVars) {
+            extension.serverVars.each{ k, v -> config.withServerVariable(k, v) }
+        }
+
+        config = config.build()
 
         def mysql = anEmbeddedMysql(config)
                 .addSchema(extension.databaseName)
-                .start();
+                .start()
 
         setMysqlProcessProperty(mysql)
     }

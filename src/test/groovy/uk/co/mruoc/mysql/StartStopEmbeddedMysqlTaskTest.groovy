@@ -1,6 +1,7 @@
 package uk.co.mruoc.mysql
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException
+import com.wix.mysql.config.Charset
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
@@ -17,6 +18,8 @@ class StartStopEmbeddedMysqlTaskTest {
     private static final def USERNAME = "user"
     private static final def PASSWORD = ""
     private static final def VERSION = v5_6_23.name()
+    private static final def CHARSET = Charset.LATIN1
+    private static final def SERVER_VARS = ["explicit_defaults_for_timestamp" : true]
 
     private def project = ProjectBuilder.builder().build()
 
@@ -53,6 +56,9 @@ class StartStopEmbeddedMysqlTaskTest {
         extension.username = USERNAME
         extension.password = PASSWORD
         extension.version = VERSION
+        extension.serverCharset = CHARSET.charset
+        extension.serverCollate = CHARSET.collate
+        extension.serverVars = SERVER_VARS
     }
 
     private getExtension() {
