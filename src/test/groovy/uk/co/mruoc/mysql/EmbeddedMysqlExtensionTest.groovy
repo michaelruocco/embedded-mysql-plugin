@@ -98,6 +98,80 @@ class EmbeddedMysqlExtensionTest {
                 .hasMessage(buildExpectedInvalidVersionMessage(invalidVersion))
     }
 
+    @Test
+    public void shouldSetCharset() {
+        def charset = "cp866"
+        extension.serverCharset = charset
+        assertThat(extension.getServerCharset()).isEqualTo(charset)
+    }
+
+    @Test
+    public void shouldThrowExceptionIfInvalidCharset() {
+        def invalid = "invalid"
+        when(extension).setServerCharset(invalid)
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+    }
+
+    @Test
+    public void shouldSetCollate() {
+        def collate = "gbk_chinese_ci"
+        extension.serverCollate = collate
+        assertThat(extension.getServerCollate()).isEqualTo(collate)
+    }
+
+    @Test
+    public void shouldThrowExceptionIfInvalidCollate() {
+        def invalid = "invalid"
+        when(extension).setServerCollate(invalid)
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+    }
+
+    @Test
+    public void shouldSetBooleanVariable() {
+        extension.serverVars = ["bool" : true]
+        assertThat(extension.serverVars).containsKey("bool")
+    }
+
+    @Test
+    public void shouldSetIntegerVariable() {
+        extension.serverVars = ["int" : 0]
+        assertThat(extension.serverVars).containsKey("int")
+    }
+
+    @Test
+    public void shouldSetStringVariable() {
+        extension.serverVars = ["str" : "any"]
+        assertThat(extension.serverVars).containsKey("str")
+    }
+
+    @Test
+    public void shouldThrowExceptionIfInvalidVariableType() {
+        when(extension).setServerVars(["any_key" : ["embedded_map" : true]])
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+    }
+
+    @Test
+    public void shouldThrowExceptionIfInvalidVariableKey() {
+        when(extension).setServerVars(["" : "any"])
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+    }
+
+    @Test
+    public void shouldThrowExceptionIfInvalidVariableValue() {
+        when(extension).setServerVars(["any" : ""])
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+    }
+
     private static String buildExpectedInvalidVersionMessage(String invalidVersion) {
         StringBuilder s = new StringBuilder()
         s.append("invalid version specified: ")
