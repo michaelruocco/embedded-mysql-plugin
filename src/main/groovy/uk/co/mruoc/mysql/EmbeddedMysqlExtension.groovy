@@ -47,15 +47,15 @@ class EmbeddedMysqlExtension {
     private def charset = Charset.defaults()
     private def serverVars = new HashMap<String, Object>()
 
-    public String getDatabaseName() {
+    String getDatabaseName() {
         return databaseName
     }
 
-    public int getPort() {
+    int getPort() {
         return port
     }
 
-    public void setUrl(String url) {
+    void setUrl(String url) {
         if (url == null)
             return
         String cleanUrl = removeJdbcPrefix(url)
@@ -64,23 +64,23 @@ class EmbeddedMysqlExtension {
         databaseName = removeForwardSlash(uri.getPath())
     }
 
-    public void setUsername(String username) {
+    void setUsername(String username) {
         this.username = username
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username
     }
 
-    public void setPassword(String password) {
+    void setPassword(String password) {
         this.password = password
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password
     }
 
-    public void setVersion(String version) {
+    void setVersion(String version) {
         try {
             this.version = Version.valueOf(version)
         } catch (IllegalArgumentException e) {
@@ -88,15 +88,15 @@ class EmbeddedMysqlExtension {
         }
     }
 
-    public Version getVersion() {
+    Version getVersion() {
         return version
     }
 
-    public Charset getCharset() {
+    Charset getCharset() {
         return charset
     }
 
-    public void setServerCharset(String charset) {
+    void setServerCharset(String charset) {
         if (charset?.trim() && CHARSETS.contains(charset.toLowerCase())) {
             this.charset = Charset.aCharset(charset, this.charset.getCharset())
         } else {
@@ -106,7 +106,7 @@ class EmbeddedMysqlExtension {
         }
     }
 
-    public void setServerCollate(String collate) {
+    void setServerCollate(String collate) {
         if (collate?.trim() && COLLATIONS.contains(collate.toLowerCase())) {
             this.charset = Charset.aCharset(charset.getCharset(), collate)
         } else {
@@ -116,19 +116,19 @@ class EmbeddedMysqlExtension {
         }
     }
 
-    public String getServerCharset() {
+    String getServerCharset() {
         return charset.charset
     }
 
-    public String getServerCollate() {
+    String getServerCollate() {
         return charset.collate
     }
 
-    public def Map<String, Object> getServerVars() {
+    Map<String, Object> getServerVars() {
         return serverVars
     }
 
-    public void setServerVars(Map<String, Object> vars) {
+    void setServerVars(Map<String, Object> vars) {
         if (vars) {
             for (e in vars) {
                 validateServerVar(e.key, e.value)
