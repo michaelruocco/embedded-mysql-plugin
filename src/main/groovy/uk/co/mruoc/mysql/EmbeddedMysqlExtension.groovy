@@ -87,25 +87,13 @@ class EmbeddedMysqlExtension {
     }
 
     void setServerVars(Map<String, Object> vars) {
-        if (vars) {
-            for (e in vars) {
-                validateServerVar(e.key, e.value)
-            }
-            this.serverVars = vars
-        }
-    }
+        if (vars == null)
+            return
 
-    private void validateServerVar(String key, Object value) {
-        if (!(key?.trim())) {
-            throw new IllegalArgumentException("Server variable name should not be empty")
+        for (e in vars)
+            ServerVariableValidator.validate(e.key, e.value)
 
-        } else if ((value == null) || (value instanceof String && !(value?.trim()))) {
-            throw new IllegalArgumentException("Value of the server variable " + key + " should not be empty")
-
-        } else if (!(value instanceof String) && !(value instanceof Boolean) && !(value instanceof Integer)) {
-            throw new IllegalArgumentException("Unsupported value for the server variable " + key +
-                    ". Value should be of type string, boolean or int.")
-        }
+        this.serverVars = vars
     }
 
 }
