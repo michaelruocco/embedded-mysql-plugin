@@ -29,7 +29,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.4'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.5'
     }
 }
 ```
@@ -64,6 +64,23 @@ embeddedMysql {
 
 Once you have set these properties they will be used to spin up your database so you can connect to
 it as you would any other mysql database.
+
+### Setting server variables and charsets
+
+It is also possible to set the charset, collate and server variables against the database configuration
+thanks to work done by [kiakimov](https://github.com/kiakimov). An example configuration is shown below:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    username = 'user'
+    password = ''
+    version  = 'v5_7_latest'
+    serverCharset = 'utf8'
+    serverCollate = 'utf8_general_ci'
+    serverVars = ['explicit_defaults_for_timestamp' : true]
+}
+```
 
 #### Default configuration
 
