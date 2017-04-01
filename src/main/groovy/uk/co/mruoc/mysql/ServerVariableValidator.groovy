@@ -10,7 +10,7 @@ class ServerVariableValidator {
             throw new IllegalArgumentException("value of server variable " + name + ": should not be empty")
 
         } else if (!(value instanceof String) && !(value instanceof Boolean) && !(value instanceof Integer)) {
-            throw new IllegalArgumentException("unsupported value for the server variable " + name +
+            throw new IllegalArgumentException("value of the server variable " + name +
                     ": should be of type string, boolean or integer")
         }
         return true

@@ -9,10 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat
 
 class ServerVariableValidatorTest {
 
-    private static NAME = "name"
-    private static VALUE = "value"
+    private static final EMPTY_NAME_MESSAGE = "server variable name should not be empty"
+    private static final EMPTY_VALUE_MESSAGE = "value of server variable " + NAME + ": should not be empty"
+    private static final INVALID_VALUE_TYPE_MESSAGE = "value of the server variable " + NAME + ": should be of type string, boolean or integer"
 
-    private validator = new ServerVariableValidator()
+    private static final NAME = "name"
+    private static final VALUE = "value"
+
+    private final validator = new ServerVariableValidator()
 
     @Test
     void throwsIllegalArgumentExceptionIfNameIsNull() {
@@ -20,25 +24,29 @@ class ServerVariableValidatorTest {
 
         then(caughtException())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("server variable name should not be empty")
+                .hasMessage(EMPTY_NAME_MESSAGE)
     }
 
     @Test
     void throwsIllegalArgumentExceptionIfNameIsEmpty() {
-        when(validator).validate("", VALUE)
+        String value = ""
+
+        when(validator).validate(value, VALUE)
 
         then(caughtException())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("server variable name should not be empty")
+                .hasMessage(EMPTY_NAME_MESSAGE)
     }
 
     @Test
     void throwsIllegalArgumentExceptionIfNameIsOnlyWhitespace() {
-        when(validator).validate("  ", VALUE)
+        String name = "  "
+
+        when(validator).validate(name, VALUE)
 
         then(caughtException())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("server variable name should not be empty")
+                .hasMessage(EMPTY_NAME_MESSAGE)
     }
 
     @Test
@@ -47,35 +55,40 @@ class ServerVariableValidatorTest {
 
         then(caughtException())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("value of server variable " + NAME + ": should not be empty")
+                .hasMessage(EMPTY_VALUE_MESSAGE)
     }
 
     @Test
     void throwsIllegalArgumentExceptionIfValueIsEmpty() {
-        when(validator).validate(NAME, "")
+        String value = ""
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("value of server variable " + NAME + ": should not be empty")
-    }
-
-    @Test
-    void throwsIllegalArgumentExceptionIfValueIsOnlyWhitespace() {
-        when(validator).validate(NAME, "  ")
-
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("value of server variable " + NAME + ": should not be empty")
-    }
-
-    @Test
-    void throwsIllegalArgumentExceptionIfValueIsNotStringBooleanOrIntegerValue() {
-        float value = 10;
         when(validator).validate(NAME, value)
 
         then(caughtException())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("unsupported value for the server variable " + NAME + ": should be of type string, boolean or integer")
+                .hasMessage(EMPTY_VALUE_MESSAGE)
+    }
+
+    @Test
+    void throwsIllegalArgumentExceptionIfValueIsOnlyWhitespace() {
+        String value = "  "
+
+        when(validator).validate(NAME, value)
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(EMPTY_VALUE_MESSAGE)
+    }
+
+    @Test
+    void throwsIllegalArgumentExceptionIfValueIsNotStringBooleanOrIntegerValue() {
+        float value = 10
+
+        when(validator).validate(NAME, value)
+
+        then(caughtException())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_VALUE_TYPE_MESSAGE)
     }
 
     @Test
@@ -87,7 +100,7 @@ class ServerVariableValidatorTest {
 
     @Test
     void returnsTrueForNameWithBooleanValue() {
-        String value = false
+        boolean value = false
 
         assertThat(validator.validate(NAME, value)).isTrue()
     }

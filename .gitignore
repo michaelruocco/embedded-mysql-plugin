@@ -3,3 +3,4 @@
 build
 embedded-mysql-plugin.iml
 my-gradle.properties
+target
