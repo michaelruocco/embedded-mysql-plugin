@@ -91,6 +91,9 @@ The default values for each of the underlying properties are:
 * username = 'user'
 * password = '' (empty string, this means no password is required to access your embedded MySQL database)
 * version = 'v5_7_latest' (default version of MySQL used by this plugin 5.6.22)
+* serverCharset = 'utf8mb4'
+* serverCollate = 'utf8mb4_unicode_ci'
+* serverVars = []
 
 This means the example configuration above could also be expressed as shown below.
 

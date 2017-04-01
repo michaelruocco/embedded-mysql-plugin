@@ -13,6 +13,8 @@ class EmbeddedMysqlExtension {
     private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_CHARSET = Charset.defaults()
 
+    private final ServerVariableValidator validator = new ServerVariableValidator();
+
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
     private def username = DEFAULT_USERNAME
@@ -91,7 +93,7 @@ class EmbeddedMysqlExtension {
             return
 
         for (e in vars)
-            ServerVariableValidator.validate(e.key, e.value)
+            validator.validate(e.key, e.value)
 
         this.serverVars = vars
     }
