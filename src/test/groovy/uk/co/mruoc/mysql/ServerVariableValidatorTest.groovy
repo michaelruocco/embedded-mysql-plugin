@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat
 
 class ServerVariableValidatorTest {
 
-    private static final EMPTY_NAME_MESSAGE = "server variable name should not be empty"
-    private static final EMPTY_VALUE_MESSAGE = "value of server variable " + NAME + ": should not be empty"
-    private static final INVALID_VALUE_TYPE_MESSAGE = "value of the server variable " + NAME + ": should be of type string, boolean or integer"
+    private static final EMPTY_NAME_MESSAGE = "server variable should have a name"
+    private static final EMPTY_VALUE_MESSAGE = "server variable " + NAME + " should have a value"
+    private static final INVALID_VALUE_TYPE_MESSAGE = "server variable " + NAME + " should be a string, boolean or integer"
 
     private static final NAME = "name"
     private static final VALUE = "value"

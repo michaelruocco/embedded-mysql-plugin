@@ -3,17 +3,39 @@ package uk.co.mruoc.mysql
 class ServerVariableValidator {
 
     boolean validate(String name, Object value) {
-        if (!(name?.trim())) {
-            throw new IllegalArgumentException("server variable name should not be empty")
-
-        } else if ((value == null) || (value instanceof String && !(value?.trim()))) {
-            throw new IllegalArgumentException("value of server variable " + name + ": should not be empty")
-
-        } else if (!(value instanceof String) && !(value instanceof Boolean) && !(value instanceof Integer)) {
-            throw new IllegalArgumentException("value of the server variable " + name +
-                    ": should be of type string, boolean or integer")
-        }
+        validateName(name)
+        validateValueType(name, value)
+        if (isString(value))
+            validateStringValue(name, value)
         return true
     }
+
+    private static void validateName(String name) {
+        if (!(name?.trim()))
+            throw new IllegalArgumentException("server variable should have a name")
+    }
+
+    private static void validateValueType(String name, Object value) {
+        if (value == null)
+            throw new IllegalArgumentException("server variable " + name + " should have a value")
+
+        if (!isValidType(value))
+            throw new IllegalArgumentException("server variable " + name + " should be a string, boolean or integer")
+    }
+
+    private static boolean isValidType(Object value) {
+        return isString(value) ||(value instanceof Boolean) || (value instanceof Integer)
+    }
+
+    private static void validateStringValue(String name, Object value) {
+        String s = (String) value
+        if (!s?.trim())
+            throw new IllegalArgumentException("server variable " + name + " should have a value")
+    }
+
+    private static boolean isString(Object value) {
+        return value instanceof String
+    }
+
 
 }
