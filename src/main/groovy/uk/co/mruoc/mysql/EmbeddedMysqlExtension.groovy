@@ -17,6 +17,7 @@ class EmbeddedMysqlExtension {
     private final CharsetValidator charsetValidator = new CharsetValidator()
     private final CollationValidator collationValidator = new CollationValidator()
     private final VersionParser versionParser = new VersionParser()
+    private final UrlParser urlParser = new UrlParser()
 
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
@@ -37,8 +38,8 @@ class EmbeddedMysqlExtension {
     void setUrl(String url) {
         if (url == null)
             return
-        port = UrlParser.extractPort(url)
-        databaseName = UrlParser.extractDatabaseName(url)
+        port = urlParser.extractPort(url)
+        databaseName = urlParser.extractDatabaseName(url)
     }
 
     void setUsername(String username) {

@@ -2,12 +2,12 @@ package uk.co.mruoc.mysql
 
 class UrlParser {
 
-    static int extractPort(String url) {
+    int extractPort(String url) {
         URI uri = toUri(url)
         return uri.getPort()
     }
 
-    static String extractDatabaseName(String url) {
+    String extractDatabaseName(String url) {
         URI uri = toUri(url)
         return removeForwardSlash(uri.getPath())
     }
