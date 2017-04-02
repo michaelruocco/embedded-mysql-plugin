@@ -1,6 +1,6 @@
 package uk.co.mruoc.mysql
 
-class CollateValidator {
+class CollationValidator {
 
     private static final def COLLATIONS = [
             "big5_chinese_ci", "dec8_swedish_ci", "cp850_general_ci", "hp8_english_ci",
@@ -15,7 +15,7 @@ class CollateValidator {
             "binary", "geostd8_general_ci", "cp932_japanese_ci", "eucjpms_japanese_ci",
             "gb18030_chinese_ci"]
 
-    static boolean validate(String collate) {
+    boolean validate(String collate) {
         if (collate?.trim() && COLLATIONS.contains(collate.toLowerCase()))
             return true
         throw new IllegalArgumentException(buildInvalidCollationMessage(collate))

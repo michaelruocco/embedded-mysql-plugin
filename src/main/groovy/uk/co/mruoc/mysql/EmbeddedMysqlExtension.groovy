@@ -15,6 +15,7 @@ class EmbeddedMysqlExtension {
 
     private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
     private final CharsetValidator charsetValidator = new CharsetValidator()
+    private final CollationValidator collationValidator = new CollationValidator()
 
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
@@ -73,7 +74,7 @@ class EmbeddedMysqlExtension {
     }
 
     void setServerCollate(String collate) {
-        if (CollateValidator.validate(collate))
+        if (collationValidator.validate(collate))
             this.charset = Charset.aCharset(this.charset.getCharset(), collate)
     }
 
