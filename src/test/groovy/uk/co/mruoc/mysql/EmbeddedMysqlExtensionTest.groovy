@@ -130,6 +130,12 @@ class EmbeddedMysqlExtensionTest {
     }
 
     @Test
+    void shouldSetNullServerVariables() {
+        extension.serverVars = null
+        assertThat(extension.serverVars).isEmpty()
+    }
+
+    @Test
     void shouldSetBooleanVariable() {
         extension.serverVars = ["bool" : true]
         assertThat(extension.serverVars).containsKey("bool")
