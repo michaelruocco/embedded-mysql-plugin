@@ -16,6 +16,7 @@ class EmbeddedMysqlExtension {
     private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
     private final CharsetValidator charsetValidator = new CharsetValidator()
     private final CollationValidator collationValidator = new CollationValidator()
+    private final VersionParser versionParser = new VersionParser()
 
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
@@ -57,7 +58,7 @@ class EmbeddedMysqlExtension {
     }
 
     void setVersion(String version) {
-        this.version = VersionParser.parse(version)
+        this.version = versionParser.parse(version)
     }
 
     Version getVersion() {

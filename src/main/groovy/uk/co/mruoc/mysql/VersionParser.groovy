@@ -4,7 +4,7 @@ import com.wix.mysql.distribution.Version
 
 class VersionParser {
 
-    static Version parse(String version) {
+    Version parse(String version) {
         try {
             return Version.valueOf(version)
         } catch (IllegalArgumentException e) {
