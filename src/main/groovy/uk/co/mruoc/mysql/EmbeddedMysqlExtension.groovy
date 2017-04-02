@@ -13,7 +13,8 @@ class EmbeddedMysqlExtension {
     private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_CHARSET = Charset.defaults()
 
-    private final ServerVariableValidator validator = new ServerVariableValidator();
+    private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
+    private final CharsetValidator charsetValidator = new CharsetValidator()
 
     private def databaseName = EMPTY_STRING
     private def port = DEFAULT_MYSQL_PORT
@@ -67,7 +68,7 @@ class EmbeddedMysqlExtension {
     }
 
     void setServerCharset(String charset) {
-        if (CharsetValidator.validate(charset))
+        if (charsetValidator.validate(charset))
             this.charset = Charset.aCharset(charset, this.charset.getCollate())
     }
 
@@ -93,7 +94,7 @@ class EmbeddedMysqlExtension {
             return
 
         for (e in vars)
-            validator.validate(e.key, e.value)
+            serverVariableValidator.validate(e.key, e.value)
 
         this.serverVars = vars
     }
