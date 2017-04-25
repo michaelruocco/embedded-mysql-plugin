@@ -71,12 +71,12 @@ pluginBundle {
     website = 'https://github.com/michaelruocco/embedded-mysql-plugin'
     vcsUrl = 'https://github.com/michaelruocco/embedded-mysql-plugin.git'
     description = 'Gradle plugin that enables running embedded MySQL for testing'
-    tags = ['MySQL', 'plugin']
+    tags = ['MySQL', 'embedded']
     version = project.version
 
     plugins {
         greetingsPlugin {
-            id = 'com.github.michaelruocco'
+            id = 'com.github.michaelruocco.embedded-mysql-plugin'
             displayName = 'embedded-mysql-plugin'
         }
     }
