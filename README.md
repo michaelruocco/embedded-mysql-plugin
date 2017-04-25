@@ -38,7 +38,7 @@ or alternatively:
 
 ```
 plugins {
-    id "com.github.michaelruocco.embedded-mysql-plugin" version "2.1.5"
+    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.5'
 }
 ```
 
