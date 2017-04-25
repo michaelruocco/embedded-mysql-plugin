@@ -34,6 +34,14 @@ buildscript {
 }
 ```
 
+or alternatively:
+
+```
+plugins {
+    id "com.github.michaelruocco.embedded-mysql-plugin" version "2.1.5"
+}
+```
+
 ### Applying the plugin
 
 To use the plugin, include the following code snippet in your build script:
