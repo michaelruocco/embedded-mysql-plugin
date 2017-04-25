@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.7'
+    }
+}
+
 plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.7.1'
@@ -11,9 +22,11 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: "com.gradle.plugin-publish"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+version = '2.1.5'
 
 repositories {
     mavenCentral()
@@ -54,6 +67,21 @@ artifacts {
     archives javadocJar
 }
 
+pluginBundle {
+    website = 'https://github.com/michaelruocco/embedded-mysql-plugin'
+    vcsUrl = 'https://github.com/michaelruocco/embedded-mysql-plugin.git'
+    description = 'Gradle plugin that enables running embedded MySQL for testing'
+    tags = ['MySQL', 'plugin']
+    version = project.version
+
+    plugins {
+        greetingsPlugin {
+            id = 'com.github.michaelruocco'
+            displayName = 'embedded-mysql-plugin'
+        }
+    }
+}
+
 gradle.taskGraph.whenReady { graph ->
     if (graph.hasTask(uploadArchives)) {
         signing {
@@ -82,7 +110,7 @@ uploadArchives {
                 description 'Gradle plugin that enables running embedded MySQL for testing'
                 groupId 'com.github.michaelruocco'
                 artifactId 'embedded-mysql-plugin'
-                version '2.1.5'
+                version project.version
                 url 'https://github.com/michaelruocco/embedded-mysql-plugin'
 
                 developers {
