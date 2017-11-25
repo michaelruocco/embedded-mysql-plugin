@@ -83,12 +83,51 @@ embeddedMysql {
     url = 'jdbc:mysql://localhost:3306/databaseName'
     username = 'user'
     password = ''
-    version  = 'v5_7_latest'
+    version = 'v5_7_latest'
     serverCharset = 'utf8'
     serverCollate = 'utf8_general_ci'
     serverVars = ['explicit_defaults_for_timestamp' : true]
 }
 ```
+
+### Setting custom cache directory and download url
+
+It is also possible to configure the cache directory used to run mysql for example if you already have
+the version you want to run downloaded and extracted into your project under a directory called custom-mysql-cache
+then you could configure the task to run the already downloaded version by adding the following:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    username = 'user'
+    password = ''
+    version = 'v5_7_latest'
+    cacheDirectoryPath = 'custom-mysql-cache'
+}
+```
+
+Obviously you can also provide a full path to a directory if it is not relative to your project. You can also
+now specify a base download url, for example if you have a mysql extract stored in a local repository (e.g. your
+own nexus or artifactory host) then you can configure the task to download using that repository instead by setting
+the base download url property:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    username = 'user'
+    password = ''
+    version = 'v5_7_latest'
+    baseDownloadUrl = 'http://my-local-repo/'
+}
+```
+
+You should note that you cannot specify the full path, and the software will append the
+various information for the version you want for you. So given the example above the full url
+that would be used is: http://my-local-repo/MySQL-5.6/mysql-5.6.23-osx10.9-x86_64.tar.gz. This
+means that you need to follow the standard of creating a directory for your version and then storing
+the archive with the default name that would be used when downloading from the central MySQL location
+(https://dev.mysql.com/get/Downloads/) directly. This is imposed by the underlying
+[embedded mysql project](https://github.com/wix/wix-embedded-mysql) that this plugin uses.
 
 #### Default configuration
 
@@ -102,6 +141,9 @@ The default values for each of the underlying properties are:
 * serverCharset = 'utf8mb4'
 * serverCollate = 'utf8mb4_unicode_ci'
 * serverVars = []
+* version = 'v5_7_latest'
+* cacheDirectoryPath = <users home directory>/.embedmysql
+* baseDownloadUrl = 'https://dev.mysql.com/get/Downloads/'
 
 This means the example configuration above could also be expressed as shown below.
 
