@@ -1,8 +1,10 @@
 package uk.co.mruoc.mysql
 
 import com.wix.mysql.config.Charset
+import com.wix.mysql.config.MysqldConfig
 import com.wix.mysql.distribution.Version
 
+import static com.wix.mysql.config.MysqldConfig.aMysqldConfig
 import static com.wix.mysql.distribution.Version.v5_7_latest
 
 class EmbeddedMysqlExtension {
@@ -100,6 +102,18 @@ class EmbeddedMysqlExtension {
             serverVariableValidator.validate(e.key, e.value)
 
         this.serverVars = vars
+    }
+
+    MysqldConfig buildConfig() {
+        def config = aMysqldConfig(version)
+                .withPort(port)
+                .withUser(username, password)
+                .withCharset(charset)
+
+        if (serverVars)
+            serverVars.each { k, v -> config.withServerVariable(k, v) }
+
+        config.build()
     }
 
 }
