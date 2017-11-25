@@ -68,10 +68,6 @@ class EmbeddedMysqlExtension {
         return version
     }
 
-    Charset getCharset() {
-        return charset
-    }
-
     void setServerCharset(String charset) {
         if (charsetValidator.validate(charset))
             this.charset = Charset.aCharset(charset, this.charset.getCollate())
