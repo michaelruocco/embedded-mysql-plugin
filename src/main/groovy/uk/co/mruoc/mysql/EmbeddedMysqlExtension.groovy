@@ -1,19 +1,23 @@
 package uk.co.mruoc.mysql
 
+import com.wix.mysql.EmbeddedMysql
 import com.wix.mysql.config.Charset
+import com.wix.mysql.config.DownloadConfig
 import com.wix.mysql.config.MysqldConfig
 import com.wix.mysql.distribution.Version
 
+import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql
+import static com.wix.mysql.config.DownloadConfig.aDownloadConfig
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig
 import static com.wix.mysql.distribution.Version.v5_7_latest
 
 class EmbeddedMysqlExtension {
 
-    private static final def EMPTY_STRING = ""
-    private static final def DEFAULT_MYSQL_PORT = 3306
-    private static final def DEFAULT_USERNAME = "user"
-    private static final def DEFAULT_VERSION = v5_7_latest
-    private static final def DEFAULT_CHARSET = Charset.defaults()
+    private static final String EMPTY_STRING = ""
+    private static final int DEFAULT_MYSQL_PORT = 3306
+    private static final String DEFAULT_USERNAME = "user"
+    private static final Version DEFAULT_VERSION = v5_7_latest
+    private static final Charset DEFAULT_CHARSET = Charset.defaults()
 
     private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
     private final CharsetValidator charsetValidator = new CharsetValidator()
@@ -21,13 +25,15 @@ class EmbeddedMysqlExtension {
     private final VersionParser versionParser = new VersionParser()
     private final UrlParser urlParser = new UrlParser()
 
-    private def databaseName = EMPTY_STRING
-    private def port = DEFAULT_MYSQL_PORT
-    private def username = DEFAULT_USERNAME
-    private def password = EMPTY_STRING
-    private def version = DEFAULT_VERSION
-    private def charset = DEFAULT_CHARSET
-    private def serverVars = new HashMap<String, Object>()
+    private String databaseName = EMPTY_STRING
+    private int port = DEFAULT_MYSQL_PORT
+    private String username = DEFAULT_USERNAME
+    private String password = EMPTY_STRING
+    private Version version = DEFAULT_VERSION
+    private Charset charset = DEFAULT_CHARSET
+    private Map<String, Object> serverVars = new HashMap<String, Object>()
+    private String cacheDirectoryPath
+    private String baseDownloadUrl
 
     String getDatabaseName() {
         return databaseName
@@ -100,16 +106,57 @@ class EmbeddedMysqlExtension {
         this.serverVars = vars
     }
 
-    MysqldConfig buildConfig() {
-        def config = aMysqldConfig(version)
+    String getCacheDirectoryPath() {
+        return cacheDirectoryPath
+    }
+
+    void setCacheDirectoryPath(String cacheDirectoryPath) {
+        this.cacheDirectoryPath = cacheDirectoryPath
+    }
+
+    String getBaseDownloadUrl() {
+        return baseDownloadUrl
+    }
+
+    void setBaseDownloadUrl(String baseDownloadUrl) {
+        this.baseDownloadUrl = baseDownloadUrl
+    }
+
+    EmbeddedMysql buildMysql() {
+        def mysqlConfig = buildMysqlConfig()
+        def downloadConfig = buildDownloadConfig()
+
+        return anEmbeddedMysql(mysqlConfig, downloadConfig)
+                .addSchema(databaseName)
+                .start()
+    }
+
+    private MysqldConfig buildMysqlConfig() {
+        def builder = aMysqldConfig(version)
                 .withPort(port)
                 .withUser(username, password)
                 .withCharset(charset)
 
         if (serverVars)
-            serverVars.each { k, v -> config.withServerVariable(k, v) }
+            serverVars.each { k, v -> builder.withServerVariable(k, v) }
 
-        config.build()
+        return builder.build()
+    }
+
+    private DownloadConfig buildDownloadConfig() {
+        def builder = aDownloadConfig();
+
+        if (cacheDirectoryPath) {
+            println 'setting cache directory path ' + cacheDirectoryPath
+            builder.withCacheDir(cacheDirectoryPath)
+        }
+
+        if (baseDownloadUrl) {
+            println 'setting base download url ' + baseDownloadUrl
+            builder.withBaseUrl(baseDownloadUrl)
+        }
+
+        return builder.build()
     }
 
 }

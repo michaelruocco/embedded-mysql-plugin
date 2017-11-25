@@ -5,3 +5,4 @@ embedded-mysql-plugin.iml
 my-gradle.properties
 target
 out
+custom-download-cache-directory
