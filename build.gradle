@@ -70,13 +70,9 @@ pluginBundle {
     }
 }
 
-gradle.taskGraph.whenReady { graph ->
-    if (graph.hasTask(uploadArchives)) {
-        signing {
-            required true
-            sign configurations.archives
-        }
-    }
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
 }
 
 uploadArchives {
