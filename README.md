@@ -29,28 +29,22 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.5'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.6'
     }
 }
+
+apply plugin: 'embedded-mysql'
 ```
 
 or alternatively:
 
 ```
 plugins {
-    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.5'
+    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.6'
 }
 ```
 
-### Applying the plugin
-
-To use the plugin, include the following code snippet in your build script:
-
-```
-apply plugin: 'embedded-mysql'
-```
-
-This will add two new tasks to your gradle build:
+The plugin will add two new tasks to your gradle build:
 
 * startEmbeddedMysql
 * stopEmbeddedMysql
