@@ -71,9 +71,9 @@ pluginBundle {
 }
 
 signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
 }
+signArchives.enabled = gradle.startParameter.taskNames.contains("uploadArchives")
 
 uploadArchives {
     repositories {
