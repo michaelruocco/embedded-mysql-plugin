@@ -29,7 +29,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.6'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.7'
     }
 }
 
@@ -40,7 +40,7 @@ or alternatively:
 
 ```
 plugins {
-    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.6'
+    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.7'
 }
 ```
 
@@ -138,6 +138,7 @@ The default values for each of the underlying properties are:
 * version = 'v5_7_latest'
 * cacheDirectoryPath = <users home directory>/.embedmysql
 * baseDownloadUrl = 'https://dev.mysql.com/get/Downloads/'
+* timeoutSeconds = 30 (default start/stop timeout)
 
 This means the example configuration above could also be expressed as shown below.
 

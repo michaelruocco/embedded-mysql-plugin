@@ -18,9 +18,11 @@ class EmbeddedMysqlExtensionTest {
     private static final def DEFAULT_USERNAME = "user"
     private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_PORT = 3306
+    private static final def DEFAULT_TIMEOUT_SECONDS = 30
 
     private static final def OVERRIDE_USERNAME = "anotherUser"
     private static final def OVERRIDE_VERSION = v5_6_latest
+    private static final def OVERRIDE_TIMEOUT_SECONDS = 60
 
     private static final def PASSWORD = "password"
 
@@ -49,6 +51,11 @@ class EmbeddedMysqlExtensionTest {
     @Test
     void versionShouldDefaultToDefaultVersion() {
         assertThat(extension.version).isEqualTo(DEFAULT_VERSION)
+    }
+
+    @Test
+    void timeoutShouldDefaultToDefaultTimeout() {
+        assertThat(extension.timeoutSeconds).isEqualTo(DEFAULT_TIMEOUT_SECONDS)
     }
 
     @Test
@@ -86,6 +93,12 @@ class EmbeddedMysqlExtensionTest {
     void shouldSetVersion() {
         extension.version = OVERRIDE_VERSION.name()
         assertThat(extension.version).isEqualTo(OVERRIDE_VERSION)
+    }
+
+    @Test
+    void shouldSetTimeoutSeconds() {
+        extension.timeoutSeconds = OVERRIDE_TIMEOUT_SECONDS
+        assertThat(extension.timeoutSeconds).isEqualTo(OVERRIDE_TIMEOUT_SECONDS)
     }
 
     @Test

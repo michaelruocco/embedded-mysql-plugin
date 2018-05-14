@@ -6,6 +6,8 @@ import com.wix.mysql.config.DownloadConfig
 import com.wix.mysql.config.MysqldConfig
 import com.wix.mysql.distribution.Version
 
+import java.util.concurrent.TimeUnit
+
 import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql
 import static com.wix.mysql.config.DownloadConfig.aDownloadConfig
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig
@@ -18,6 +20,7 @@ class EmbeddedMysqlExtension {
     private static final String DEFAULT_USERNAME = "user"
     private static final Version DEFAULT_VERSION = v5_7_latest
     private static final Charset DEFAULT_CHARSET = Charset.defaults()
+    private static final int DEFAULT_TIMEOUT_SECONDS = 30
 
     private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
     private final CharsetValidator charsetValidator = new CharsetValidator()
@@ -31,6 +34,7 @@ class EmbeddedMysqlExtension {
     private String password = EMPTY_STRING
     private Version version = DEFAULT_VERSION
     private Charset charset = DEFAULT_CHARSET
+    private int timeoutSeconds = DEFAULT_TIMEOUT_SECONDS
     private Map<String, Object> serverVars = new HashMap<String, Object>()
     private String cacheDirectoryPath
     private String baseDownloadUrl
@@ -72,6 +76,14 @@ class EmbeddedMysqlExtension {
 
     Version getVersion() {
         return version
+    }
+
+    void setTimeoutSeconds(int timeoutSeconds) {
+        this.timeoutSeconds = timeoutSeconds
+    }
+
+    int getTimeoutSeconds() {
+        return timeoutSeconds
     }
 
     void setServerCharset(String charset) {
@@ -136,6 +148,7 @@ class EmbeddedMysqlExtension {
                 .withPort(port)
                 .withUser(username, password)
                 .withCharset(charset)
+                .withTimeout(timeoutSeconds, TimeUnit.SECONDS)
 
         if (serverVars)
             serverVars.each { k, v -> builder.withServerVariable(k, v) }

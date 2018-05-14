@@ -22,6 +22,7 @@ class StartStopEmbeddedMysqlTaskTest {
     private static final def VERSION = v5_6_23.name()
     private static final def CHARSET = Charset.LATIN1
     private static final def SERVER_VARS = ["explicit_defaults_for_timestamp": true]
+    private static final def TIMEOUT_SECONDS = 45
 
     private def project = ProjectBuilder.builder().build()
 
@@ -74,6 +75,7 @@ class StartStopEmbeddedMysqlTaskTest {
         extension.serverCharset = CHARSET.charset
         extension.serverCollate = CHARSET.collate
         extension.serverVars = SERVER_VARS
+        extension.timeoutSeconds = TIMEOUT_SECONDS
         extension
     }
 
