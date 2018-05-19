@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/michaelruocco/embedded-mysql-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaelruocco/embedded-mysql-plugin?branch=master)
 
 This plugin is built around the [embedded mysql project](https://github.com/wix/wix-embedded-mysql).
-It allows you to easily start up a MySQL process withouth having to install it by hand. Currently
+It allows you to easily start up a MySQL process without having to install it by hand. Currently
 the plugin only exposes the ability to be able to set the port the process is running on and a 
 username a password to use when connecting. There are various other configuration options offered
 in the [embedded mysql project](https://github.com/wix/wix-embedded-mysql) that could be exposed with
