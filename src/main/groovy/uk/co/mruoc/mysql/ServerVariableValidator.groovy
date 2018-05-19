@@ -2,7 +2,7 @@ package uk.co.mruoc.mysql
 
 class ServerVariableValidator {
 
-    boolean validate(String name, Object value) {
+    static boolean validate(String name, Object value) {
         validateName(name)
         validateValueType(name, value)
         if (isString(value))

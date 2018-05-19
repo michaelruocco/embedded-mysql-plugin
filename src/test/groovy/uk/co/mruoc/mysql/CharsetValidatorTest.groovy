@@ -2,9 +2,8 @@ package uk.co.mruoc.mysql
 
 import org.junit.Test
 
-import static com.googlecode.catchexception.CatchException.caughtException
-import static com.googlecode.catchexception.apis.BDDCatchException.when
-import static org.assertj.core.api.BDDAssertions.then
+import static org.assertj.core.api.Assertions.assertThatThrownBy
+import static org.assertj.core.api.Assertions.catchThrowable
 import static org.assertj.core.api.Assertions.assertThat
 
 class CharsetValidatorTest {
@@ -15,9 +14,7 @@ class CharsetValidatorTest {
     void shouldThrowExceptionIfNullCharsetSpecified() {
         String charset = null
 
-        when(validator).validate(charset)
-
-        then(caughtException())
+        assertThatThrownBy({ validator.validate(charset) })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid charset specified: " + charset)
     }
@@ -26,9 +23,9 @@ class CharsetValidatorTest {
     void shouldThrowExceptionIfEmptyCharsetSpecified() {
         String charset = ""
 
-        when(validator).validate(charset)
+        Throwable thrown = catchThrowable({ validator.validate(charset) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid charset specified: " + charset)
     }
@@ -37,9 +34,9 @@ class CharsetValidatorTest {
     void shouldThrowExceptionIfInvalidCharsetSpecified() {
         String charset = "invalid"
 
-        when(validator).validate(charset)
+        Throwable thrown = catchThrowable({ validator.validate(charset) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid charset specified: " + charset)
     }

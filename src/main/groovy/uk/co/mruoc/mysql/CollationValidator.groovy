@@ -15,7 +15,7 @@ class CollationValidator {
             "binary", "geostd8_general_ci", "cp932_japanese_ci", "eucjpms_japanese_ci",
             "gb18030_chinese_ci"]
 
-    boolean validate(String collate) {
+    static boolean validate(String collate) {
         if (collate?.trim() && COLLATIONS.contains(collate.toLowerCase()))
             return true
         throw new IllegalArgumentException(buildInvalidCollationMessage(collate))

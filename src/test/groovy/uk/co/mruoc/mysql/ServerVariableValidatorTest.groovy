@@ -2,9 +2,7 @@ package uk.co.mruoc.mysql
 
 import org.junit.Test
 
-import static com.googlecode.catchexception.apis.BDDCatchException.when
-import static com.googlecode.catchexception.CatchException.caughtException
-import static org.assertj.core.api.BDDAssertions.then
+import static org.assertj.core.api.Assertions.catchThrowable
 import static org.assertj.core.api.Assertions.assertThat
 
 class ServerVariableValidatorTest {
@@ -20,9 +18,9 @@ class ServerVariableValidatorTest {
 
     @Test
     void throwsIllegalArgumentExceptionIfNameIsNull() {
-        when(validator).validate(null, VALUE)
+        Throwable thrown = catchThrowable({ validator.validate(null, VALUE) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_NAME_MESSAGE)
     }
@@ -31,9 +29,9 @@ class ServerVariableValidatorTest {
     void throwsIllegalArgumentExceptionIfNameIsEmpty() {
         String value = ""
 
-        when(validator).validate(value, VALUE)
+        Throwable thrown = catchThrowable({ validator.validate(value, VALUE) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_NAME_MESSAGE)
     }
@@ -42,18 +40,18 @@ class ServerVariableValidatorTest {
     void throwsIllegalArgumentExceptionIfNameIsOnlyWhitespace() {
         String name = "  "
 
-        when(validator).validate(name, VALUE)
+        Throwable thrown = catchThrowable({ validator.validate(name, VALUE) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_NAME_MESSAGE)
     }
 
     @Test
     void throwsIllegalArgumentExceptionIfValueIsNull() {
-        when(validator).validate(NAME, null)
+        Throwable thrown = catchThrowable({ validator.validate(NAME, null) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_VALUE_MESSAGE)
     }
@@ -62,9 +60,9 @@ class ServerVariableValidatorTest {
     void throwsIllegalArgumentExceptionIfValueIsEmpty() {
         String value = ""
 
-        when(validator).validate(NAME, value)
+        Throwable thrown = catchThrowable({ validator.validate(NAME, value) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_VALUE_MESSAGE)
     }
@@ -73,9 +71,9 @@ class ServerVariableValidatorTest {
     void throwsIllegalArgumentExceptionIfValueIsOnlyWhitespace() {
         String value = "  "
 
-        when(validator).validate(NAME, value)
+        Throwable thrown = catchThrowable({ validator.validate(NAME, value) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(EMPTY_VALUE_MESSAGE)
     }
@@ -84,9 +82,9 @@ class ServerVariableValidatorTest {
     void throwsIllegalArgumentExceptionIfValueIsNotStringBooleanOrIntegerValue() {
         float value = 10
 
-        when(validator).validate(NAME, value)
+        Throwable thrown = catchThrowable({ validator.validate(NAME, value) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_VALUE_TYPE_MESSAGE)
     }

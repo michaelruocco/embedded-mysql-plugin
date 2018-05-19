@@ -157,7 +157,7 @@ class EmbeddedMysqlExtension {
     }
 
     private DownloadConfig buildDownloadConfig() {
-        def builder = aDownloadConfig();
+        def builder = aDownloadConfig()
 
         if (cacheDirectoryPath) {
             println 'setting cache directory path ' + cacheDirectoryPath

@@ -2,6 +2,7 @@ package uk.co.mruoc.mysql
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException
 import com.wix.mysql.config.Charset
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FileUtils
 import org.gradle.api.tasks.TaskExecutionException
 import org.gradle.testfixtures.ProjectBuilder
@@ -12,6 +13,7 @@ import java.sql.DriverManager
 import static com.wix.mysql.distribution.Version.v5_6_23
 import static org.assertj.core.api.Assertions.assertThat
 
+@Slf4j
 class StartStopEmbeddedMysqlTaskTest {
 
     private static final def DATABASE_NAME = "databaseName"
@@ -93,7 +95,7 @@ class StartStopEmbeddedMysqlTaskTest {
         task.execute()
     }
 
-    private mysqlRunning() {
+    private static mysqlRunning() {
         try {
             def connection = getConnection()
             try {
@@ -102,11 +104,12 @@ class StartStopEmbeddedMysqlTaskTest {
                 connection.close()
             }
         } catch (CommunicationsException e) {
+            log.debug(e.getMessage(), e)
             return false
         }
     }
 
-    private getMysqlVersion() {
+    private static getMysqlVersion() {
         def connection = getConnection()
         try {
             def meta = connection.getMetaData()
@@ -116,11 +119,11 @@ class StartStopEmbeddedMysqlTaskTest {
         }
     }
 
-    private getConnection() {
+    private static getConnection() {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD)
     }
 
-    private format(String version) {
+    private static format(String version) {
         version = version.replaceAll("_", ".")
         version = version.replaceAll("v", "")
         return version

@@ -11,7 +11,7 @@ class EmbeddedMysqlPluginTest {
     private Project project = ProjectBuilder.builder().build()
 
     @Test
-    public void addsEmbeddedMysqlExtensionToProject() {
+    void addsEmbeddedMysqlExtensionToProject() {
         applyPluginToProject()
         assertThat(project.extensions.embeddedMysql instanceof EmbeddedMysqlExtension).isTrue()
     }

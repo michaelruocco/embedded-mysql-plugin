@@ -2,10 +2,8 @@ package uk.co.mruoc.mysql
 
 import org.junit.Test
 
-import static com.googlecode.catchexception.CatchException.caughtException
-import static com.googlecode.catchexception.apis.BDDCatchException.when
 import static org.assertj.core.api.Assertions.assertThat
-import static org.assertj.core.api.BDDAssertions.then
+import static org.assertj.core.api.Assertions.catchThrowable
 
 class CollationValidatorTest {
 
@@ -15,9 +13,9 @@ class CollationValidatorTest {
     void shouldThrowExceptionIfNullCollationSpecified() {
         String collate = null
 
-        when(validator).validate(collate)
+        Throwable thrown = catchThrowable({ validator.validate(collate) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid collation specified: " + collate)
     }
@@ -26,9 +24,9 @@ class CollationValidatorTest {
     void shouldThrowExceptionIfEmptyCollationSpecified() {
         String collate = ""
 
-        when(validator).validate(collate)
+        Throwable thrown = catchThrowable({ validator.validate(collate) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid collation specified: " + collate)
     }
@@ -37,9 +35,9 @@ class CollationValidatorTest {
     void shouldThrowExceptionIfInvalidCollationSpecified() {
         String collate = "invalid"
 
-        when(validator).validate(collate)
+        Throwable thrown = catchThrowable({ validator.validate(collate) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid collation specified: " + collate)
     }

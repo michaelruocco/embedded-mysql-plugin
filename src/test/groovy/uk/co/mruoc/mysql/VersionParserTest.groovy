@@ -4,10 +4,8 @@ import org.junit.Test
 
 import com.wix.mysql.distribution.Version
 
-import static com.googlecode.catchexception.CatchException.caughtException
-import static com.googlecode.catchexception.apis.BDDCatchException.when
-import static org.assertj.core.api.BDDAssertions.then
 import static org.assertj.core.api.Assertions.assertThat
+import static org.assertj.core.api.Assertions.catchThrowable
 
 class VersionParserTest {
 
@@ -17,9 +15,9 @@ class VersionParserTest {
     void shouldThrowExceptionIfInvalidVersionSpecified() {
         def invalidVersion = "invalid version"
 
-        when(parser).parse(invalidVersion)
+        Throwable thrown = catchThrowable({ parser.parse(invalidVersion) })
 
-        then(caughtException())
+        assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("invalid version specified: " + invalidVersion)
     }

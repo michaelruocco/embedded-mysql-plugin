@@ -2,12 +2,10 @@ package uk.co.mruoc.mysql
 
 import org.junit.Test
 
-import static com.googlecode.catchexception.CatchException.caughtException
-import static org.assertj.core.api.BDDAssertions.then
-import static com.googlecode.catchexception.apis.BDDCatchException.when
 import static com.wix.mysql.distribution.Version.v5_6_latest
 import static com.wix.mysql.distribution.Version.v5_7_latest
 import static org.assertj.core.api.Assertions.assertThat
+import static org.assertj.core.api.Assertions.catchThrowable
 
 class EmbeddedMysqlExtensionTest {
 
@@ -104,10 +102,10 @@ class EmbeddedMysqlExtensionTest {
     @Test
     void shouldThrowExceptionIfInvalidVersionSpecified() {
         def invalidVersion = "invalid version"
-        when(extension).setVersion(invalidVersion)
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        Throwable thrown = catchThrowable({ extension.setVersion(invalidVersion) })
+
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
     @Test
@@ -120,10 +118,10 @@ class EmbeddedMysqlExtensionTest {
     @Test
     void shouldThrowExceptionIfInvalidCharset() {
         def invalid = "invalid"
-        when(extension).setServerCharset(invalid)
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        Throwable thrown = catchThrowable({ extension.setServerCharset(invalid) })
+
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
     @Test
@@ -136,10 +134,10 @@ class EmbeddedMysqlExtensionTest {
     @Test
     void shouldThrowExceptionIfInvalidCollate() {
         def invalid = "invalid"
-        when(extension).setServerCollate(invalid)
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        Throwable thrown = catchThrowable({ extension.setServerCollate(invalid) })
+
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
     @Test
@@ -168,26 +166,23 @@ class EmbeddedMysqlExtensionTest {
 
     @Test
     void shouldThrowExceptionIfInvalidVariableType() {
-        when(extension).setServerVars(["any_key" : ["embedded_map" : true]])
+        Throwable thrown = catchThrowable({ extension.setServerVars(["any_key" : ["embedded_map" : true]]) })
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
     @Test
     void shouldThrowExceptionIfInvalidVariableKey() {
-        when(extension).setServerVars(["" : "any"])
+        Throwable thrown = catchThrowable({ extension.setServerVars(["" : "any"]) })
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
     @Test
     void shouldThrowExceptionIfInvalidVariableValue() {
-        when(extension).setServerVars(["any" : ""])
+        Throwable thrown = catchThrowable({ extension.setServerVars(["any" : ""]) })
 
-        then(caughtException())
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
 }

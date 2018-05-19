@@ -8,7 +8,7 @@ class StopEmbeddedMysqlTask extends DefaultTask {
 
     private static final def MYSQL_PROCESS_PROPERTY_NAME = "mysqlProcess"
 
-    def StopEmbeddedMysqlTask() {
+    StopEmbeddedMysqlTask() {
         description 'stops an embedded mysql process'
     }
 

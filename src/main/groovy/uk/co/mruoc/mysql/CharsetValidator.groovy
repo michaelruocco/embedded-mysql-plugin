@@ -15,7 +15,7 @@ class CharsetValidator {
             "binary", "geostd8", "cp932", "eucjpms",
             "gb18030"]
 
-    boolean validate(String charset) {
+    static boolean validate(String charset) {
         if (charset?.trim() && CHARSETS.contains(charset.toLowerCase()))
             return true
         throw new IllegalArgumentException(buildInvalidCharsetMessage(charset))
