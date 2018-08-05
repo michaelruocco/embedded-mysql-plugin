@@ -7,8 +7,8 @@
 
 This plugin is built around the [embedded mysql project](https://github.com/wix/wix-embedded-mysql).
 It allows you to easily start up a MySQL process without having to install it by hand. Currently
-the plugin only exposes the ability to be able to set the port the process is running on and a 
-username a password to use when connecting. There are various other configuration options offered
+the plugin only exposes the ability to be able to set the port the process is running on; an
+username and a password to use when connecting. There are various other configuration options offered
 in the [embedded mysql project](https://github.com/wix/wix-embedded-mysql) that could be exposed with
 further development of the plugin if / when required.
 
