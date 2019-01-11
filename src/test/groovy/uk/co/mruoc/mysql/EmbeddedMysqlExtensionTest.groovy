@@ -185,4 +185,18 @@ class EmbeddedMysqlExtensionTest {
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
     }
 
+    @Test
+    void shouldSetSchema() {
+        def schema = "test1,test2"
+        extension.schema = schema
+        assertThat(extension.getSchema()).is(schema)
+    }
+
+    @Test
+    void shouldIgnoreSchema() {
+        def schema = " ,  "
+        extension.schema = schema
+        assertThat(extension.getSchema()).isEmpty()
+    }
+
 }

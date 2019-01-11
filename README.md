@@ -84,6 +84,42 @@ embeddedMysql {
 }
 ```
 
+### Setting additional schemas
+
+It is also possible to provide an additional schema or even set of schemas. Additional schemas will be created 
+by the process among with the default one (taken from connection string). Same username and password can be 
+used to access all schemas.
+
+This setup won't create additional schema:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    schema = 'databaseName'
+    ...
+}
+```
+
+This setup will create one additional schema:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    schema = 'additionalSchema'
+    ...
+}
+```
+
+And this setup will create several additional schemas:
+
+```
+embeddedMysql {
+    url = 'jdbc:mysql://localhost:3306/databaseName'
+    schema = 'additionalSchema1, additionalSchema2'
+    ...
+}
+```
+
 ### Setting custom cache directory and download url
 
 It is also possible to configure the cache directory used to run mysql for example if you already have
@@ -139,6 +175,7 @@ The default values for each of the underlying properties are:
 * cacheDirectoryPath = <users home directory>/.embedmysql
 * baseDownloadUrl = 'https://dev.mysql.com/get/Downloads/'
 * timeoutSeconds = 30 (default start/stop timeout)
+* schema = '' (empty set, process will not create additional schemas and will use 'databaseName')
 
 This means the example configuration above could also be expressed as shown below.
 
