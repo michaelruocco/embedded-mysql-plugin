@@ -17,8 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat
 class StartStopEmbeddedMysqlTaskTest {
 
     private static final def DATABASE_NAME = "databaseName"
+    private static final def ADDITIONAL_SCHEMA = "anotherDatabase"
     private static final def PORT = 3307
-    private static final def URL = "jdbc:mysql://localhost:" + PORT + "/" + DATABASE_NAME
+    private static final def URL = "jdbc:mysql://localhost:" + PORT + "/"
     private static final def USERNAME = "user"
     private static final def PASSWORD = ""
     private static final def VERSION = v5_6_23.name()
@@ -68,9 +69,25 @@ class StartStopEmbeddedMysqlTaskTest {
         executeStopTask()
     }
 
+    @Test
+    void shouldStartWithAdditionalSchema() {
+        def extension = configureExtension()
+        extension.schema = ADDITIONAL_SCHEMA
+        executeStartTask()
+
+        assertThat(mysqlRunning()).isTrue()
+        assertThat(mysqlRunning(ADDITIONAL_SCHEMA)).isTrue()
+
+        executeStopTask()
+    }
+
     private configureExtension() {
+        return configureExtension(DATABASE_NAME)
+    }
+
+    private configureExtension(String schema) {
         def extension = getExtension()
-        extension.url = URL
+        extension.url = url(schema)
         extension.username = USERNAME
         extension.password = PASSWORD
         extension.version = VERSION
@@ -96,8 +113,12 @@ class StartStopEmbeddedMysqlTaskTest {
     }
 
     private static mysqlRunning() {
+        return mysqlRunning(DATABASE_NAME)
+    }
+
+    private static mysqlRunning(String schema) {
         try {
-            def connection = getConnection()
+            def connection = getConnection(schema)
             try {
                 return connection.isValid(1)
             } finally {
@@ -120,7 +141,11 @@ class StartStopEmbeddedMysqlTaskTest {
     }
 
     private static getConnection() {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD)
+        return DriverManager.getConnection(url(DATABASE_NAME), USERNAME, PASSWORD)
+    }
+
+    private static getConnection(String schema) {
+        return DriverManager.getConnection(url(schema), USERNAME, PASSWORD)
     }
 
     private static format(String version) {
@@ -129,4 +154,7 @@ class StartStopEmbeddedMysqlTaskTest {
         return version
     }
 
+    private static url(String schema) {
+        return URL + schema
+    }
 }

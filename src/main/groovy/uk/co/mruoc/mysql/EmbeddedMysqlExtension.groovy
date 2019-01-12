@@ -29,6 +29,7 @@ class EmbeddedMysqlExtension {
     private final UrlParser urlParser = new UrlParser()
 
     private String databaseName = EMPTY_STRING
+    private Set<String> schemaSet = new HashSet<String>()
     private int port = DEFAULT_MYSQL_PORT
     private String username = DEFAULT_USERNAME
     private String password = EMPTY_STRING
@@ -41,6 +42,14 @@ class EmbeddedMysqlExtension {
 
     String getDatabaseName() {
         return databaseName
+    }
+
+    String getSchema() {
+        return SchemaParser.toString(schemaSet)
+    }
+
+    void setSchema(String schema) {
+        schemaSet = SchemaParser.parseSchema(schema)
     }
 
     int getPort() {
@@ -138,9 +147,15 @@ class EmbeddedMysqlExtension {
         def mysqlConfig = buildMysqlConfig()
         def downloadConfig = buildDownloadConfig()
 
-        return anEmbeddedMysql(mysqlConfig, downloadConfig)
-                .addSchema(databaseName)
-                .start()
+        def mysql = anEmbeddedMysql(mysqlConfig, downloadConfig)
+
+        if (!schemaSet.contains(databaseName))
+            mysql.addSchema(databaseName)
+
+        for (String schema : schemaSet)
+            mysql.addSchema(schema)
+
+        return mysql.start()
     }
 
     private MysqldConfig buildMysqlConfig() {
