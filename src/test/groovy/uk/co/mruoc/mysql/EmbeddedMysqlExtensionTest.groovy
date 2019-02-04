@@ -17,10 +17,12 @@ class EmbeddedMysqlExtensionTest {
     private static final def DEFAULT_VERSION = v5_7_latest
     private static final def DEFAULT_PORT = 3306
     private static final def DEFAULT_TIMEOUT_SECONDS = 30
+    private static final def DEFAULT_TEMP_DIR = 'build/mysql-temp/'
 
     private static final def OVERRIDE_USERNAME = "anotherUser"
     private static final def OVERRIDE_VERSION = v5_6_latest
     private static final def OVERRIDE_TIMEOUT_SECONDS = 60
+    private static final def OVERRIDE_TEMP_DIR = 'build/mysql-custom-temp'
 
     private static final def PASSWORD = "password"
 
@@ -54,6 +56,11 @@ class EmbeddedMysqlExtensionTest {
     @Test
     void timeoutShouldDefaultToDefaultTimeout() {
         assertThat(extension.timeoutSeconds).isEqualTo(DEFAULT_TIMEOUT_SECONDS)
+    }
+
+    @Test
+    void tempDirShouldDefaultToTarget() {
+        assertThat(extension.tempDir).isEqualTo(DEFAULT_TEMP_DIR)
     }
 
     @Test
@@ -97,6 +104,12 @@ class EmbeddedMysqlExtensionTest {
     void shouldSetTimeoutSeconds() {
         extension.timeoutSeconds = OVERRIDE_TIMEOUT_SECONDS
         assertThat(extension.timeoutSeconds).isEqualTo(OVERRIDE_TIMEOUT_SECONDS)
+    }
+
+    @Test
+    void shouldSetTempDir() {
+        extension.tempDir = OVERRIDE_TEMP_DIR
+        assertThat(extension.tempDir).isEqualTo(OVERRIDE_TEMP_DIR)
     }
 
     @Test

@@ -29,7 +29,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.8'
+        classpath 'com.github.michaelruocco:embedded-mysql-plugin:2.1.9'
     }
 }
 
@@ -40,7 +40,7 @@ or alternatively:
 
 ```
 plugins {
-    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.8'
+    id 'com.github.michaelruocco.embedded-mysql-plugin' version '2.1.9'
 }
 ```
 
@@ -176,6 +176,7 @@ The default values for each of the underlying properties are:
 * baseDownloadUrl = 'https://dev.mysql.com/get/Downloads/'
 * timeoutSeconds = 30 (default start/stop timeout)
 * schema = '' (empty set, process will not create additional schemas and will use 'databaseName')
+* tempDir = 'build/mysql-temp/' (default temporary directory)
 
 This means the example configuration above could also be expressed as shown below.
 
