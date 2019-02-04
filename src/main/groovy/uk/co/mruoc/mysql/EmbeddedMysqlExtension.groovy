@@ -21,6 +21,7 @@ class EmbeddedMysqlExtension {
     private static final Version DEFAULT_VERSION = v5_7_latest
     private static final Charset DEFAULT_CHARSET = Charset.defaults()
     private static final int DEFAULT_TIMEOUT_SECONDS = 30
+    private static final String DEFAULT_TEMP_DIR = "build/mysql-temp/"
 
     private final ServerVariableValidator serverVariableValidator = new ServerVariableValidator()
     private final CharsetValidator charsetValidator = new CharsetValidator()
@@ -36,6 +37,7 @@ class EmbeddedMysqlExtension {
     private Version version = DEFAULT_VERSION
     private Charset charset = DEFAULT_CHARSET
     private int timeoutSeconds = DEFAULT_TIMEOUT_SECONDS
+    private String tempDir = DEFAULT_TEMP_DIR
     private Map<String, Object> serverVars = new HashMap<String, Object>()
     private String cacheDirectoryPath
     private String baseDownloadUrl
@@ -93,6 +95,14 @@ class EmbeddedMysqlExtension {
 
     int getTimeoutSeconds() {
         return timeoutSeconds
+    }
+
+    void setTempDir(String tempDir) {
+        this.tempDir = tempDir
+    }
+
+    String getTempDir() {
+        return tempDir
     }
 
     void setServerCharset(String charset) {
@@ -164,6 +174,7 @@ class EmbeddedMysqlExtension {
                 .withUser(username, password)
                 .withCharset(charset)
                 .withTimeout(timeoutSeconds, TimeUnit.SECONDS)
+                .withTempDir(tempDir)
 
         if (serverVars)
             serverVars.each { k, v -> builder.withServerVariable(k, v) }
