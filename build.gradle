@@ -23,12 +23,12 @@ dependencies {
     compile gradleApi()
     compile localGroovy()
 
-    compile 'com.wix:wix-embedded-mysql:4.2.0'
-    compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'com.wix:wix-embedded-mysql:4.6.1'
+    compile 'org.apache.commons:commons-lang3:3.9'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.11.1'
-    testCompile 'mysql:mysql-connector-java:8.0.13'
+    testCompile 'org.assertj:assertj-core:3.14.0'
+    testCompile 'mysql:mysql-connector-java:8.0.18'
 }
 
 jacocoTestReport {
