@@ -62,7 +62,7 @@ pluginBundle {
     version = project.version
 
     plugins {
-        greetingsPlugin {
+        embeddedMysqlPlugin {
             id = 'com.github.michaelruocco.embedded-mysql-plugin'
             displayName = 'embedded-mysql-plugin'
         }
