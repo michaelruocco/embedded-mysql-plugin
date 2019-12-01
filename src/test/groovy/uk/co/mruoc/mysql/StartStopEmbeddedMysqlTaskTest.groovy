@@ -10,7 +10,7 @@ import org.junit.Test
 
 import java.sql.DriverManager
 
-import static com.wix.mysql.distribution.Version.v5_6_23
+import static com.wix.mysql.distribution.Version.v8_0_17
 import static org.assertj.core.api.Assertions.assertThat
 
 @Slf4j
@@ -22,7 +22,7 @@ class StartStopEmbeddedMysqlTaskTest {
     private static final def URL = "jdbc:mysql://localhost:" + PORT + "/"
     private static final def USERNAME = "user"
     private static final def PASSWORD = ""
-    private static final def VERSION = v5_6_23.name()
+    private static final def VERSION = v8_0_17.name()
     private static final def CHARSET = Charset.LATIN1
     private static final def SERVER_VARS = ["explicit_defaults_for_timestamp": true]
     private static final def TIMEOUT_SECONDS = 45
