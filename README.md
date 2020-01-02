@@ -44,6 +44,14 @@ plugins {
 }
 ```
 
+Kotlin DSL:
+
+```
+plugins {
+    id("com.github.michaelruocco.embedded-mysql-plugin") version "2.1.11"
+}
+```
+
 The plugin will add two new tasks to your gradle build:
 
 * startEmbeddedMysql
@@ -61,6 +69,16 @@ embeddedMysql {
     username = 'user'
     password = ''
     version = 'v5_7_latest'
+}
+```
+Kotlin DSL:
+
+```
+embeddedMysql {
+    setUrl("jdbc:mysql://localhost:3306/test")
+    username = "test"
+    password = ""
+    setVersion("v5_7_latest")
 }
 ```
 
